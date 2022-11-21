@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\salt-app\\ProjectPet\\webApiPet\\wwwroot\\dockersqlserver.png",
-      "PackagePath": "staticwebassets\\dockersqlserver.png"
-    },
-    {
       "Id": "C:\\salt-app\\ProjectPet\\webApiPet\\wwwroot\\gui",
       "PackagePath": "staticwebassets"
     },

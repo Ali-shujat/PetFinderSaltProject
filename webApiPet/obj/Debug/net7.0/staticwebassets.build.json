@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9CGl6YZ+Qf3bgh+FEyOHRrrRzXzoiuYtUDAHRfztAco=",
+  "Hash": "Aeb3TqENmP2rj2mXRXiux7kPRIey9Iq9kcsR2uzjRCQ=",
   "Source": "webApiPet",
   "BasePath": "_content/webApiPet",
   "Mode": "Default",
@@ -16,23 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\salt-app\\ProjectPet\\webApiPet\\wwwroot\\dockersqlserver.png",
-      "SourceId": "webApiPet",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\salt-app\\ProjectPet\\webApiPet\\wwwroot\\",
-      "BasePath": "_content/webApiPet",
-      "RelativePath": "dockersqlserver.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\dockersqlserver.png"
-    },
     {
       "Identity": "C:\\salt-app\\ProjectPet\\webApiPet\\wwwroot\\gui",
       "SourceId": "webApiPet",
