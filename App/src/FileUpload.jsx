@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
 import { Container } from '@mui/material';
 import { Input, Button } from '@mui/material';
+import React, { useState } from "react";
+import axios from "axios";
 
 export const FileUpload = () => {
   const [file, setFile] = useState();
@@ -13,11 +13,25 @@ export const FileUpload = () => {
     setFileName(e.target.files[0].name);
   };
 
+  const uploadFile = async (e) => {
+    console.log(file);
+    const formData = new FormData();
+    formData.append("formFile", file);
+    formData.append("fileName", fileName);
+    try {
+      const res = await axios.post("https://localhost:44323/api/file", formData);
+      console.log(res);
+    } catch (ex) {
+      console.log(ex);
     }
   };
 
   return (
     <>
+
+      {/*  // simple html
+       <input type="file" onChange={saveFile} />
+      <input type="button" value="upload" onClick={uploadFile} /> */}
       <Container maxWidth="sm">
         <h1>Upload Files</h1>
         <Input type="file" onChange={saveFile} />
