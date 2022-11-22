@@ -4,6 +4,7 @@ import { TextField } from '@mui/material';
 import { Box } from '@mui/material';
 import { Container } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import CustomMap from "../components/CustomMap";
 
 function Sighter() {
     const [textValue, setTextValue] = useState("");
@@ -12,6 +13,11 @@ function Sighter() {
     const handleReset = () => setTextValue("something");
   return (
     <>
+    <Container>
+        <div>
+          <CustomMap />
+        </div>
+      </Container>
     <Container>
         <Box
             component="form"
@@ -25,28 +31,19 @@ function Sighter() {
             <TextField
                 onChange={onTextChange}
                 value={textValue}
-                label={"Name"} //optional
+                label={"Color"} //optional
             />
-            <TextField
-                onChange={onTextChange}
-                value={textValue}
-                label={"Breed"} //optional
-            />
-            <TextField
-                onChange={onTextChange}
-                value={textValue}
-                label={"Size"} //optional
-            />
-            <TextField
-                onChange={onTextChange}
-                value={textValue}
-                label={"Characteristics"} //optional
-            />
-            <TextField
+             <TextField
                 onChange={onTextChange}
                 value={textValue}
                 label={"Description"} //optional
             />
+            <TextField
+                onChange={onTextChange}
+                value={textValue}
+                label={"contact Info"} //optional
+            />
+           
 
             <Stack >
             <Button variant="contained" onClick={handleSubmit}>Submit</Button>
