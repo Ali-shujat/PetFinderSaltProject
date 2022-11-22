@@ -32,9 +32,6 @@ export const FileUpload = () => {
   return (
     <>
 
-      {/*  // simple html
-       <input type="file" onChange={saveFile} />
-      <input type="button" value="upload" onClick={uploadFile} /> */}
       <Box sx={{
         '& .MuiTextField-root': { m: 1.5, width: '25ch' },
       }}>

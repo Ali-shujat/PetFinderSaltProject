@@ -1,19 +1,21 @@
 
 import './App.css';
-import { FileUpload } from './FileUpload';
+import { FileUpload } from './pages/FileUpload';
 import Wanting from './pages/Wanting';
-import LabelBottomNavigation from './pages/LabelBottomNavigation';
+import BottomNav from './pages/BottomNav';
 import Navbar from './pages/Navbar';
+import Sighter from './pages/Sighter';
 
 function App() {
   return (
     <>
-    <Navbar />
+      <Navbar />
       <div className="App">
-       
         <FileUpload />
-      </div> 
-      <LabelBottomNavigation />
+        {/* <Sighter/> */}
+        {/* <Wanting/> */}
+      </div>
+      <BottomNav />
     </>
   );
 }
