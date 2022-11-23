@@ -7,15 +7,17 @@ import Navbar from './pages/Navbar';
 import Sighter from './pages/Sighter';
 import CustomMap from './components/CustomMap';
 import { Container } from '@material-ui/core';
+import AddWanting from './pages/AddWanting';
 
 function App() {
   return (
     <>
       <Navbar />
       <div className="App"> 
+
         {/* <FileUpload /> */}
-        <Sighter/>
-        {/* <Wanting/> */}
+        {/* <Sighter/> */}
+        <Wanting/>
       </div>     
       <BottomNav />
     </>
