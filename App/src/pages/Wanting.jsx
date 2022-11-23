@@ -11,20 +11,20 @@ function Wanting() {
     const position = useRef("");
     const evenInfo = useRef("");
 
-    const navigate = useNavigate();
-    function wantingHandler() { 
+    //const navigate = useNavigate();
+    function wantingHandler() {
         var payload = {
-            developerName: ownerName.current.value,
-            qualification: email.current.value,
-            expertise: catName.current.value,
-            imageUrl: position.current.value,
-            imageUrl: evenInfo.current.value,
+            OwnerName: ownerName.current.value,
+            Email: email.current.value,
+            CatName: catName.current.value,
+            Position: position.current.value,
+            EventInfo: evenInfo.current.value,
         };
 
         axios
             .post("https://localhost:7073/SuperDeveloper", payload)
             .then((response) => {
-                navigate("/");
+                //navigate("/");
             });
     }
     return (
@@ -32,7 +32,7 @@ function Wanting() {
             <Container
                 variant="outlined"
                 sx={{ width: 400, maxWidth: '100%', gap: 1.5 }}>
-               <Typography variant="h4" color="inherit" noWrap>
+                <Typography variant="h4" color="inherit" noWrap>
                     Pet Finder Form
                 </Typography>
                 <Divider />
