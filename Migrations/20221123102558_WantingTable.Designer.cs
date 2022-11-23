@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using testing.Data;
 
@@ -10,9 +11,11 @@ using testing.Data;
 namespace testing.Migrations
 {
     [DbContext(typeof(testingContext))]
-    partial class testingContextModelSnapshot : ModelSnapshot
+    [Migration("20221123102558_WantingTable")]
+    partial class WantingTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -17,5 +17,7 @@ namespace testing.Data
         public DbSet<testing.Data.Entities.Cat> Cat { get; set; } = default!;
 
         public DbSet<testing.Data.Entities.Person> Person { get; set; } = default!;
+
+        public DbSet<testing.Data.Entities.Wanting> Wanting { get; set; } = default!;
     }
 }
