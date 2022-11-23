@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "Aeb3TqENmP2rj2mXRXiux7kPRIey9Iq9kcsR2uzjRCQ=",
+  "Source": "webApiPet",
+  "BasePath": "_content/webApiPet",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "webApiPet\\wwwroot",
+      "Source": "webApiPet",
+      "ContentRoot": "C:\\salt-app\\ProjectPet\\webApiPet\\wwwroot\\",
+      "BasePath": "_content/webApiPet",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\salt-app\\ProjectPet\\webApiPet\\wwwroot\\gui",
+      "SourceId": "webApiPet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\salt-app\\ProjectPet\\webApiPet\\wwwroot\\",
+      "BasePath": "_content/webApiPet",
+      "RelativePath": "gui",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\gui"
+    }
+  ]
+}
