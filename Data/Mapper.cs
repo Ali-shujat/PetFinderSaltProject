@@ -10,7 +10,11 @@ public class Mapper
     {
         return new Cat
         {
-            Name = request.CatName,            
+            Name = request.CatName, 
+            Owner = new Person {
+                FirstName = request.OwnerName,
+                Email = request.Email
+            }           
         };        
     }
     public Person WantingReqToPerson(WantingRequest request)
@@ -30,8 +34,8 @@ public class Mapper
         {
             Cat = CreateCat,
             EventInfo = request.EventInfo,
-            Latitud =request.Position[0],
-            Longitud = request.Position[1],
+           // Latitud =request.Position[0],
+           // Longitud = request.Position[1],
         };
     }
 }

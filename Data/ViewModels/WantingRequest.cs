@@ -18,6 +18,6 @@ public class WantingRequest
     public double[] Position { get; set; }
     [Required]
     public string EventInfo { get; set; }
-    public string FileName { get; set; }
-    public IFormFile FormFile { get; set; }
+  //  public string FileName { get; set; }
+  //  public IFormFile FormFile { get; set; }
 }
