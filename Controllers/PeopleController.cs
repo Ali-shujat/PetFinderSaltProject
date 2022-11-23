@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using testing.Data;
-using testing.Data.Entities;
+using PetFinderApi.Data;
+using PetFinderApi.Data.Entities;
 
-namespace testing.Controllers
+namespace PetFinderApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class PeopleController : ControllerBase
     {
-        private readonly testingContext _context;
+        private readonly PetFinderContext _context;
 
-        public PeopleController(testingContext context)
+        public PeopleController(PetFinderContext context)
         {
             _context = context;
         }

@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using testing.Data;
+using PetFinderApi.Data;
 
 #nullable disable
 
 namespace testing.Migrations
 {
-    [DbContext(typeof(testingContext))]
+    [DbContext(typeof(PetFinderContext))]
     [Migration("20221123102558_WantingTable")]
     partial class WantingTable
     {

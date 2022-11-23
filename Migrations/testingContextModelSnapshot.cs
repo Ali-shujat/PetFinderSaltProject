@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using testing.Data;
+using PetFinderApi.Data;
 
 #nullable disable
 
 namespace testing.Migrations
 {
-    [DbContext(typeof(testingContext))]
+    [DbContext(typeof(PetFinderContext))]
     partial class testingContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
