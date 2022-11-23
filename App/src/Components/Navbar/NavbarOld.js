@@ -57,7 +57,7 @@ function Navbar() {
                 textDecoration: 'none',
               }}
             >
-              HOME
+              LOGO
             </Typography>
           </Link>
 
@@ -91,16 +91,12 @@ function Navbar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link to={`/${page}`}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </Link>
+                  <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
-
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
@@ -121,11 +117,6 @@ function Navbar() {
           >
             LOGO
           </Typography>
-          <Link to="/map">
-            {/* <MenuItem key={page} onClick={handleCloseNavMenu}> */}
-            <Typography textAlign="center">MapPpPp</Typography>
-            {/* </MenuItem> */}
-          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -169,7 +160,7 @@ function Navbar() {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar >
+    </AppBar>
   );
 }
 export default Navbar;
