@@ -34,17 +34,20 @@ const Front = () => {
               Map
             </Button>
           </Link>
-
-          <Button variant="contained">
-            Report
-            <br />
-            Found Cat
-          </Button>
-          <Button variant="contained">
-            Report
-            <br />
-            Lost Cat
-          </Button>
+          <Link to="reportlostcat" relative="path">
+            <Button variant="contained">
+              Report
+              <br />
+              Lost Cat
+            </Button>
+          </Link>
+          <Link to="reportfoundcat" relative="path">
+            <Button variant="contained">
+              Report
+              <br />
+              Found Cat
+            </Button>
+          </Link>
         </div>
       </div>
       {/* <Link to="/map">Sightings map</Link> */}

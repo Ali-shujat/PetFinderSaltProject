@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Highlight';
 import { Link } from 'react-router-dom';
 
-const pages = ['Map', 'ReportLostCat', 'About'];
+const pages = ['Map', 'ReportLostCat', 'ReportFoundCat', 'About'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {

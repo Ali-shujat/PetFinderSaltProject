@@ -7,7 +7,8 @@ import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
 import { Route, Routes } from "react-router-dom";
 import BottomNav from './Components/BottomNav/BottomNav';
-
+import Sighter from './Pages/Sighter/Sighter';
+import Wanting from './Pages/Wanting/Wanting';
 
 function App() {
 
@@ -41,9 +42,9 @@ function App() {
           <Routes>
             <Route path="" element={<Frontpage />} />
             <Route path="/" element={<Frontpage />} />
-            <Route path="/reportsighting" element={<Frontpage />} />
             <Route path="/map" element={<Map />} />
-            <Route path="/login" element={<Frontpage />} />
+            <Route path="/reportlostcat" element={<Wanting />} />
+            <Route path="/reportfoundcat" element={<Sighter />} />
             <Route path="/about" element={<Frontpage />} />
           </Routes>
         </main>
