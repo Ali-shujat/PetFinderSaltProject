@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PetFinderApi.Data;
-using PetFinderApi.Data.Entities;
-using PetFinderApi.Data.ViewModels;
+using PetFinderApi.Models;
 
 namespace PetFinderApi.Controllers;
 

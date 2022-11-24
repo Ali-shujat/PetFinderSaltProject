@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PetFinderApi.Data.Entities
-{
+namespace PetFinderApi.Models;
+
     public class Person
     {
         [Key]
@@ -12,4 +12,4 @@ namespace PetFinderApi.Data.Entities
         public string? Phone { get; set; }
         public string? Email { get; set; }
     }
-}
+

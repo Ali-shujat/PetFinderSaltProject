@@ -2,7 +2,7 @@ using PetFinderApi.Data;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace PetFinderApi.Data.ViewModels;
+namespace PetFinderApi.Models;
 
 public class WantingRequest
 {

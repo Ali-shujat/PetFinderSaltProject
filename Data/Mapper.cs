@@ -1,6 +1,5 @@
 
-using PetFinderApi.Data.Entities;
-using PetFinderApi.Data.ViewModels;
+using PetFinderApi.Models;
 
 namespace PetFinderApi.Data;
 

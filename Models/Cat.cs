@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PetFinderApi.Data.Entities
-{
+namespace PetFinderApi.Models;
+
     public class Cat
     {
         [Key]
@@ -25,4 +25,4 @@ namespace PetFinderApi.Data.Entities
 
         public virtual Person Owner { get; set; }
     }
-}
+

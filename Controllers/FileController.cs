@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PetFinderApi.Data.Entities;
+using PetFinderApi.Models;
 
 namespace PetFinderApi.Controllers;
 

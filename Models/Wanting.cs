@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace PetFinderApi.Data.Entities;
+namespace PetFinderApi.Models;
 
 public class Wanting
 {

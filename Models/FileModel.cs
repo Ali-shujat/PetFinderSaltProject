@@ -1,4 +1,4 @@
-﻿namespace PetFinderApi.Data.Entities;
+﻿namespace PetFinderApi.Models;
 
 
 public class FileModel

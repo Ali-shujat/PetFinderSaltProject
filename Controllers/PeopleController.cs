@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PetFinderApi.Data;
-using PetFinderApi.Data.Entities;
+using PetFinderApi.Models;
 
 namespace PetFinderApi.Controllers
 {

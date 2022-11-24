@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.ComponentModel.DataAnnotations;
 
-namespace PetFinderApi.Data.ViewModels;
+namespace PetFinderApi.Models;
 
 public class LocationValidation: ValidationAttribute
 {

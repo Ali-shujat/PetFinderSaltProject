@@ -1,4 +1,4 @@
-using PetFinderApi.Data.Entities;
+using PetFinderApi.Models;
 
 namespace PetFinderApi.Data;
 
