@@ -11,21 +11,40 @@ const Front = () => {
       className="landingimage"
       style={{ backgroundImage: `url(${landingimage})` }}
     >
-      <div className="landingimage__herotext">
+      <div className="landingimage__herobox">
         <h1 className="landingimage__herotitle">Pet Finder</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam
-          accusamus vero non tempore iure modi mollitia vitae similique tenetur
-          inventore illo itaque facilis, provident sapiente delectus dolorum
-          nulla veniam ullam.
-        </p>
-
+        <div className="landingimage__herotext">
+          <p>
+            A service for global lost and found pets Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Illo, ex.
+          </p>
+          <p>
+            <b>Pet Finder</b>
+            <i> (name TBD)</i> is a global web service for helping people with
+            runaway pets to connect with people who might have seen it. People
+            are encouraged to use the <b>"Report Seemingly Lost Animal"</b>
+            <i>(TBD)</i> portal if you spot a roaming pet which seems lost.
+          </p>
+        </div>
         <div className="landingimage__herotextbuttons">
           <Link to="map" relative="path">
-            <Button variant="contained">See Map</Button>
+            <Button variant="contained">
+              Sightings
+              <br />
+              Map
+            </Button>
           </Link>
 
-          <Button variant="contained">Report Lost Cat</Button>
+          <Button variant="contained">
+            Report
+            <br />
+            Found Cat
+          </Button>
+          <Button variant="contained">
+            Report
+            <br />
+            Lost Cat
+          </Button>
         </div>
       </div>
       {/* <Link to="/map">Sightings map</Link> */}

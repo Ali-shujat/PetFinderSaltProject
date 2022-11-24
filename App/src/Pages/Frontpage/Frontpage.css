@@ -9,8 +9,8 @@
   background-size: cover;
   height: 90vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-rows: minmax(40px, auto);
+  grid-template-columns: 4fr 5fr 1fr;
+  /* grid-auto-rows: minmax(40px, auto); */
   grid-template-rows: 1fr 3fr 1fr;
   overflow: hidden;
 }
@@ -22,19 +22,26 @@
   text-align: center;
 }
 
-.landingimage__herotext {
+.landingimage__herobox {
   grid-column: 2 / span 1;
   grid-row: 2 / span 1;
+  background-color: rgba(150, 30, 30, 0.4);
   backdrop-filter: blur(60px);
-  padding: 6px 12px;
-  margin-right: 12px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  font-size: 1.4rem;
-  max-height: 100%;
+  justify-content: space-evenly;
+  /* font-size: 20px; */
+  /* max-height: 75%; */
+  height: auto;
   font-size: 100%;
+}
+
+.landingimage__herotext {
+}
+
+.landingimage__herotext > p {
+  font-size: large;
 }
 
 .landingimage__herotextbuttons {
