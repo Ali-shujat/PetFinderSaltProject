@@ -41,7 +41,7 @@ function Navbar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Link to="/blaaah">
+         
             <Typography
               variant="h6"
               noWrap
@@ -59,7 +59,7 @@ function Navbar() {
             >
               LOGO
             </Typography>
-          </Link>
+          
 
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

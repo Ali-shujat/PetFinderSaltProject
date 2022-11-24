@@ -18,8 +18,8 @@ function Wanting() {
             OwnerName: ownerName.current.value,
             Email: email.current.value,
             CatName: catName.current.value,
-            Position: position.current.focus(),
-            EventInfo: evenInfo.current.focus(),
+            Position: position.current.value,
+            EventInfo: evenInfo.current.value,
         };
         console.log(payload);
         axios
@@ -47,40 +47,34 @@ function Wanting() {
                     }}
                     noValidate
                 >
-
-                    <input style={{ width: '30ch', margin: '1rem' }}
+                    <input
                         placeholder="Please enter owner name"
                         ref={ownerName}
                         type="text"
                     />
-                    <input style={{ width: '30ch', margin: '1rem' }}
+                    
+                    <input
                         placeholder="Please enter your email"
                         ref={email}
                         type="text"
                     />
-                    <FormControl>
-                        <TextField
-                            helperText="Please enter your cat name"
-                            id="catName"
-                            label="Cat Name"
-                            ref={catName}
-                        />
-                        <TextField
-                            helperText="Please enter your Location"
-                            id="position"
-                            label="Cat Location"
-                            ref={position}
-                        />
-                        <TextField
-                            helperText="Please enter event info"
-                            id="eventInfo"
-                            label="Event information"
-                            ref={evenInfo}
-                        />
-                    </FormControl>
-
+                    <input
+                        placeholder="Please enter your cat name"
+                        ref={catName}
+                        type="text"
+                    />
+                    <input
+                        placeholder="Please enter your Location"
+                        ref={position}
+                        type="text"
+                    />
+                    <input
+                        placeholder="Please enter event info"
+                        ref={evenInfo}
+                        type="text"
+                    />
                 </Box>
-                <Button variant="contained" onClick={wantingHandler} sx={{ mt: 3, ml: 1 }}>Submit</Button>
+                <Button variant="contained" color="success" onClick={wantingHandler} sx={{ mt: 3 }}>Submit</Button>
             </Container>
         </div>
     )

@@ -36,10 +36,10 @@ function App() {
     <>
       <Navbar />
       <div className="App"> 
-{/* <AddWanting/> */}
+<AddWanting/>
         {/* <FileUpload /> */}
         {/* <Sighter/> */}
-        <Wanting/>
+        {/* <Wanting/> */}
       </div>     
       <BottomNav />
     </>
