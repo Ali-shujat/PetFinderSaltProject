@@ -24,5 +24,6 @@ namespace PetFinderApi.Models;
         public string? Gender { get; set; }
 
         public virtual Person Owner { get; set; }
-    }
+
+}
 

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PetFinderApi.Data;
+using PetFinderApi.Data.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PetFinderContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("testingContext") ?? throw new InvalidOperationException("Connection string 'testingContext' not found.")));
