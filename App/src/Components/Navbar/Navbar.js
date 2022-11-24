@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import AdbIcon from '@mui/icons-material/Highlight';
 import { Link } from 'react-router-dom';
 
 const pages = ['Map', 'ReportLostCat', 'About'];
@@ -57,7 +57,7 @@ function Navbar() {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              PetFinder
             </Typography>
           </Link>
 
@@ -92,7 +92,10 @@ function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page}
+                  onClick={handleCloseNavMenu}
+                  component={Link} to={page}
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -122,6 +125,7 @@ function Navbar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
+                component={Link} to={page}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -160,7 +164,7 @@ function Navbar() {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </AppBar >
   );
 }
 export default Navbar;

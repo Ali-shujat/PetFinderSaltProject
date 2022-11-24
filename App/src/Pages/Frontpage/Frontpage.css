@@ -9,9 +9,9 @@
   background-size: cover;
   height: 90vh;
   display: grid;
-  grid-template-columns: 4fr 5fr 1fr;
+  grid-template-columns: 10fr 20fr 1fr;
   /* grid-auto-rows: minmax(40px, auto); */
-  grid-template-rows: 1fr 3fr 1fr;
+  grid-template-rows: 1fr 7fr 1fr 2fr;
   overflow: hidden;
 }
 
@@ -24,7 +24,7 @@
 
 .landingimage__herobox {
   grid-column: 2 / span 1;
-  grid-row: 2 / span 1;
+  grid-row: 2 / span 2;
   background-color: rgba(11, 59, 22, 0.4);
   backdrop-filter: blur(60px);
   padding: 5px;
@@ -33,11 +33,13 @@
   justify-content: space-evenly;
   /* font-size: 20px; */
   /* max-height: 75%; */
+  /* height: 1000px; */
   height: auto;
   font-size: 100%;
 }
 
 .landingimage__herotext {
+  /* color: rgb(212, 176, 237); */
 }
 
 .landingimage__herotext > p {

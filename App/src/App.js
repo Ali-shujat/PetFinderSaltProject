@@ -6,6 +6,7 @@ import Container from '@mui/material/Container';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
 import { Route, Routes } from "react-router-dom";
+import BottomNav from './Components/BottomNav/BottomNav';
 
 
 function App() {
@@ -47,10 +48,10 @@ function App() {
           </Routes>
         </main>
 
-        <footer>
-          Footer
-        </footer>
+        {/* <footer> */}
+        {/* </footer> */}
       </Container>
+      <BottomNav />
 
     </ThemeProvider>
   );
