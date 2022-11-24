@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import BottomNav from './Components/BottomNav/BottomNav';
 import Sighter from './Pages/Sighter/Sighter';
 import Wanting from './Pages/Wanting/Wanting';
+import Footer from './Components/Footer/Footer';
 
 function App() {
 
@@ -51,8 +52,9 @@ function App() {
 
         {/* <footer> */}
         {/* </footer> */}
+        <Footer />
+
       </Container>
-      <BottomNav />
 
     </ThemeProvider>
   );

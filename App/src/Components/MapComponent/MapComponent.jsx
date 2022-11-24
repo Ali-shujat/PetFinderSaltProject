@@ -9,7 +9,11 @@ import {
 } from "react-leaflet";
 
 function MapComponent() {
-  const [position, setPosition] = useState(null);
+  const [catCoords, setCatCoords] = useState([]);
+
+  // useEffect(() => {
+  //   // Fetch data from the db to get coords and other data
+  // }, []);
 
   //TODO: Add geolocation so map centers on user location
 
