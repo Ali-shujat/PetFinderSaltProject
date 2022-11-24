@@ -14,7 +14,7 @@ function App() {
     <>
       <Navbar />
       <div className="App"> 
-
+{/* <AddWanting/> */}
         {/* <FileUpload /> */}
         {/* <Sighter/> */}
         <Wanting/>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useRef } from "react";
-import { Divider, Typography, FormHelperText, Button, Box, Container, TextField } from '@mui/material';
+import { Divider, Typography, Input, Button, Box, Container, TextField, FormControl } from '@mui/material';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import './Wanting.css';
 
 function Wanting() {
     const ownerName = useRef("");
@@ -17,18 +18,22 @@ function Wanting() {
             OwnerName: ownerName.current.value,
             Email: email.current.value,
             CatName: catName.current.value,
-            Position: position.current.value,
-            EventInfo: evenInfo.current.value,
+            Position: position.current.focus(),
+            EventInfo: evenInfo.current.focus(),
         };
-
+        console.log(payload);
         axios
-            .post("https://localhost:7073/SuperDeveloper", payload)
+            .post("https://localhost:7164/api/Cats/wanting", payload)
             .then((response) => {
                 //navigate("/");
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error.response);
             });
     }
     return (
-        <div>
+        <div className='wanting'>
             <Container
                 variant="outlined"
                 sx={{ width: 400, maxWidth: '100%', gap: 1.5 }}>
@@ -41,33 +46,38 @@ function Wanting() {
                         '& .MuiTextField-root': { m: 1, width: '25ch' },
                     }}
                     noValidate
-                    autoComplete="off">
+                >
 
-                    <TextField
-                        helperText="Please enter owner name"
-                        id="ownerName"
-                        label="Owner Name"
+                    <input style={{ width: '30ch', margin: '1rem' }}
+                        placeholder="Please enter owner name"
+                        ref={ownerName}
+                        type="text"
                     />
-                    <TextField
-                        helperText="Please enter your email"
-                        id="email"
-                        label="email"
+                    <input style={{ width: '30ch', margin: '1rem' }}
+                        placeholder="Please enter your email"
+                        ref={email}
+                        type="text"
                     />
-                    <TextField
-                        helperText="Please enter your cat name"
-                        id="catName"
-                        label="Cat Name"
-                    />
-                    <TextField
-                        helperText="Please enter your Location"
-                        id="position"
-                        label="Cat Location"
-                    />
-                    <TextField
-                        helperText="Please enter event info"
-                        id="eventInfo"
-                        label="Event information"
-                    />
+                    <FormControl>
+                        <TextField
+                            helperText="Please enter your cat name"
+                            id="catName"
+                            label="Cat Name"
+                            ref={catName}
+                        />
+                        <TextField
+                            helperText="Please enter your Location"
+                            id="position"
+                            label="Cat Location"
+                            ref={position}
+                        />
+                        <TextField
+                            helperText="Please enter event info"
+                            id="eventInfo"
+                            label="Event information"
+                            ref={evenInfo}
+                        />
+                    </FormControl>
 
                 </Box>
                 <Button variant="contained" onClick={wantingHandler} sx={{ mt: 3, ml: 1 }}>Submit</Button>
