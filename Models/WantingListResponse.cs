@@ -6,7 +6,7 @@ namespace PetFinderApi.Models;
 
 public class WantingListResponse
 {
-    public List<Wanting
+    //public List<Wanting>
     //TODO: check håkans!
     [Required]
     public string CatName { get; set; }

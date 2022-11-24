@@ -19,5 +19,8 @@ namespace PetFinderApi.Data
         public DbSet<PetFinderApi.Models.Person> Person { get; set; } = default!;
 
         public DbSet<PetFinderApi.Models.Wanting> Wanting { get; set; } = default!;
+
+        public DbSet<PetFinderApi.Models.Sighting> Sighting { get; set; } = default!;
+
     }
 }
