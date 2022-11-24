@@ -26,15 +26,13 @@ public class Mapper
     }
     public Wanting WantingReqToWanting(WantingRequest request)
     {
-        var CreatePerson = WantingReqToPerson(request);
         var CreateCat = WantingReqToCat(request);
-        //TODO: add owner
         return new Wanting
         {
             Cat = CreateCat,
             EventInfo = request.EventInfo,
-           // Latitud =request.Position[0],
-           // Longitud = request.Position[1],
+            Latitud =request.Position[0],
+            Longitud = request.Position[1],
         };
     }
 }

@@ -19,8 +19,10 @@ public class WantingRepo : IWantingService
         var wanting = await _context.Wanting.FindAsync(id);
         return wanting;
     }
-    public Wanting Create(string eventInfo, Cat cat, Person person, double[] position)
+    public async Task<Wanting> Create(Wanting wanting)
     {
-        return null;
+        _context.Wanting.Add(wanting);
+        await _context.SaveChangesAsync();
+        return wanting;
     }
 }
