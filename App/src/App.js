@@ -10,6 +10,7 @@ import { Container } from '@material-ui/core';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
 import { Route, Routes } from "react-router-dom";
+import AddWanting from './pages/AddWanting';
 
 function App() {
   // Temporary test values
@@ -33,28 +34,14 @@ function App() {
 
   return (
     <>
-      <ThemeProvider theme={kattTheme}>
-
-        <Container maxWidth="lg">
-          <Navbar />
-
-          <main id="ContentArea">
-            <Routes>
-              <Route path="" element={<Wanting />} />
-              <Route path="/" element={<Wanting />} />
-              <Route path="/reportsighting" element={<FileUpload />} />
-              <Route path="/map" element={<CustomMap />} />
-              <Route path="/login" element={<Sighter />} />
-              <Route path="/about" element={<Wanting />} />
-            </Routes>
-          </main>
-
-          {/* <footer>
-            Footer
-          </footer> */}
-        </Container>
-        <BottomNav></BottomNav>
-      </ThemeProvider>
+      <Navbar />
+      <div className="App"> 
+{/* <AddWanting/> */}
+        {/* <FileUpload /> */}
+        {/* <Sighter/> */}
+        <Wanting/>
+      </div>     
+      <BottomNav />
     </>
   );
 }

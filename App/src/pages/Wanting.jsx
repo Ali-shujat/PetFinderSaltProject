@@ -1,62 +1,89 @@
-import React, { useState } from "react";
-import { Button } from '@mui/material';
-import { TextField } from '@mui/material';
-import { Box } from '@mui/material';
-import { Container } from '@mui/material';
-import Stack from '@mui/material/Stack';
+import React from 'react';
+import { useRef } from "react";
+import { Divider, Typography, Input, Button, Box, Container, TextField, FormControl } from '@mui/material';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import './Wanting.css';
 
 function Wanting() {
+    const ownerName = useRef("");
+    const email = useRef("");
+    const catName = useRef("");
+    const position = useRef("");
+    const evenInfo = useRef("");
 
-    const [textValue, setTextValue] = useState("");
-    const onTextChange = (e) => setTextValue(e.target.value);
-    const handleSubmit = () => console.log("i am click");
-    const handleReset = () => setTextValue("something");
+    //const navigate = useNavigate();
+    function wantingHandler() {
+        var payload = {
+            OwnerName: ownerName.current.value,
+            Email: email.current.value,
+            CatName: catName.current.value,
+            Position: position.current.focus(),
+            EventInfo: evenInfo.current.focus(),
+        };
+        console.log(payload);
+        axios
+            .post("https://localhost:7164/api/Cats/wanting", payload)
+            .then((response) => {
+                //navigate("/");
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    }
     return (
-        <>
-            <Container>
-                <Box
-                    component="form"
+        <div className='wanting'>
+            <Container
+                variant="outlined"
+                sx={{ width: 400, maxWidth: '100%', gap: 1.5 }}>
+                <Typography variant="h4" color="inherit" noWrap>
+                    Pet Finder Form
+                </Typography>
+                <Divider />
+                <Box component="form"
                     sx={{
                         '& .MuiTextField-root': { m: 1, width: '25ch' },
                     }}
                     noValidate
-                    autoComplete="off"
                 >
-                    <h2>Wanting Input Form</h2>
-                    <TextField
-                        onChange={onTextChange}
-                        value={textValue}
-                        label={"Name"} //optional
-                    />
-                    <TextField
-                        onChange={onTextChange}
-                        value={textValue}
-                        label={"Breed"} //optional
-                    />
-                    <TextField
-                        onChange={onTextChange}
-                        value={textValue}
-                        label={"Size"} //optional
-                    />
-                    <TextField
-                        onChange={onTextChange}
-                        value={textValue}
-                        label={"Characteristics"} //optional
-                    />
-                    <TextField
-                        onChange={onTextChange}
-                        value={textValue}
-                        label={"Description"} //optional
-                    />
 
-                    <Stack >
-                    <Button variant="contained" onClick={handleSubmit}>Submit</Button>
-                        {/* <Button variant="contained" onClick={handleReset}>Reset</Button> */}
-                    </Stack>
-                </Box></Container>
-        </>
+                    <input style={{ width: '30ch', margin: '1rem' }}
+                        placeholder="Please enter owner name"
+                        ref={ownerName}
+                        type="text"
+                    />
+                    <input style={{ width: '30ch', margin: '1rem' }}
+                        placeholder="Please enter your email"
+                        ref={email}
+                        type="text"
+                    />
+                    <FormControl>
+                        <TextField
+                            helperText="Please enter your cat name"
+                            id="catName"
+                            label="Cat Name"
+                            ref={catName}
+                        />
+                        <TextField
+                            helperText="Please enter your Location"
+                            id="position"
+                            label="Cat Location"
+                            ref={position}
+                        />
+                        <TextField
+                            helperText="Please enter event info"
+                            id="eventInfo"
+                            label="Event information"
+                            ref={evenInfo}
+                        />
+                    </FormControl>
+
+                </Box>
+                <Button variant="contained" onClick={wantingHandler} sx={{ mt: 3, ml: 1 }}>Submit</Button>
+            </Container>
+        </div>
     )
 }
 
 export default Wanting
-
