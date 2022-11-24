@@ -53,7 +53,7 @@ function Navbar() {
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
-                color: 'inherit',
+                color: 'black',
                 textDecoration: 'none',
               }}
             >
@@ -118,7 +118,7 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            PET FINDER
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (

@@ -16,10 +16,10 @@ function App() {
   const kattTheme = createTheme({
     palette: {
       primary: {
-        light: '#20c997',
-        main: '#0ca678',
-        dark: '#087f5b',
-        contrastText: '#e6fcf5',
+        light: '#549caa',
+        main: '#0b7285',
+        dark: '#08505d',
+        contrastText: '#010b0d',
 
       },
       secondary: {
