@@ -35,12 +35,12 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="App"> 
-<AddWanting/>
+      <div className="App">
+        {/* <AddWanting/> */}
         {/* <FileUpload /> */}
         {/* <Sighter/> */}
-        {/* <Wanting/> */}
-      </div>     
+        <Wanting />
+      </div>
       <BottomNav />
     </>
   );

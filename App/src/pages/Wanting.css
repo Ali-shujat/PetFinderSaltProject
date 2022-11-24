@@ -1,9 +1,9 @@
-/* .wanting {
+ .wanting {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
 }
-
+/*
 .inputField {
     display: inline-block;
 
@@ -19,9 +19,9 @@ select {
     border-radius: 4px;
     box-sizing: border-box;
 }
-
+*/
 Button {
-    width: 100%;
+    width: 35ch;
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -33,4 +33,4 @@ Button {
 
 Button:hover {
     background-color: #3e8c42;
-} */
+} 
