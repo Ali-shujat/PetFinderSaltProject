@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PetFinderApi.Data;
+using PetFinderApi.Data.Services;
 using PetFinderApi.Models;
+using PetFinderApi.Data;
 
 namespace PetFinderApi.Controllers;
 
@@ -11,52 +11,28 @@ public class WantingController : ControllerBase
 {
     private Mapper mapper = new Mapper();
     private readonly PetFinderContext _context;
-    private IWantingRepo _repo;
-    public WantingController(IWantingRepo repo, PetFinderContext context)
+    private IWantingService _service;
+    public WantingController(IWantingService service, PetFinderContext context)
     {
-        _repo = repo;
+        _service = service;
         _context = context;
-
     }
 
-    // GET: api/Cats
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Wanting>>> GetAllWanting()
     {
-        if (_context.Wanting == null)
-        {
-            return NotFound();
-        }
-        return await _context.Wanting.ToListAsync();
+        var wantings = await _service.GetAll();
+        return Ok(wantings);
     }
 
-    // GET: api/Cats/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Wanting>> GetOneWanting(int id)
     {
-        if (_context.Cat == null)
-        {
-            return NotFound();
-        }
-        var wanting = await _context.Wanting.FindAsync(id);
-
-        if (wanting == null)
-        {
-            return NotFound();
-        }
-
-        return wanting;
+        var wanting = await _service.GetOne(id);
+        if (wanting == null) return NotFound();
+        return Ok(wanting);
     }
-        /*
-        [HttpPost]
-        public ActionResult Create(WantingRequest request)
-        {
-            var Cat = mapper.WantingReqToCat(request);
-            var Person = mapper.WantingReqToPerson(request);
-            var Created = _repo.Create(request.EventInfo, Cat, Person, request.Position);
-            return Ok();
-        }
-    */
+ 
     [HttpPost]
     public async Task<ActionResult<Wanting>> Create(WantingRequest request)
     {

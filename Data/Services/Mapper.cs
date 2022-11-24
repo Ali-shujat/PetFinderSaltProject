@@ -1,7 +1,7 @@
 
 using PetFinderApi.Models;
 
-namespace PetFinderApi.Data;
+namespace PetFinderApi.Data.Services;
 
 public class Mapper
 {
