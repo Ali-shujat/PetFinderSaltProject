@@ -26,12 +26,37 @@ public class Mapper
     }
     public Wanting WantingReqToWanting(WantingRequest request)
     {
-        var CreateCat = WantingReqToCat(request);
+        //var CreateCat = WantingReqToCat(request);
         return new Wanting
         {
-            Cat = CreateCat,
+            Cat = new Cat 
+            {
+                Name = request.CatName,
+                Owner = new Person 
+                {
+                    FirstName = request.OwnerName
+                }
+            },
             EventInfo = request.EventInfo,
             Latitud =request.Position[0],
+            Longitud = request.Position[1],
+        };
+    }
+
+    public Wanting TryAgain(WantingRequest request)
+    {
+        return new Wanting
+        {
+            Cat = new Cat
+            {
+                Name = request.CatName,
+                Owner = new Person
+                {
+                    FirstName = request.OwnerName
+                }
+            },
+            EventInfo = request.EventInfo,
+            Latitud = request.Position[0],
             Longitud = request.Position[1],
         };
     }

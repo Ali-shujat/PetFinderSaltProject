@@ -21,8 +21,7 @@ public class WantingRepo : IWantingService
     }
     public async Task<Wanting> Create(Wanting wanting)
     {
-        _context.Wanting.Add(wanting);
-        await _context.SaveChangesAsync();
+        var made = await _context.Wanting.AddAsync(wanting);
         return wanting;
     }
 }
