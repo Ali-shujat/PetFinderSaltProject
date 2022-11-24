@@ -11,8 +11,8 @@ const Front = () => {
       className="landingimage"
       style={{ backgroundImage: `url(${landingimage})` }}
     >
-      <h1 className="landingimage__herotitle">Pet Finder</h1>
       <div className="landingimage__herotext">
+        <h1 className="landingimage__herotitle">Pet Finder</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam
           accusamus vero non tempore iure modi mollitia vitae similique tenetur

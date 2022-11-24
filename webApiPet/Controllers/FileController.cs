@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using webApiPet.Model;
+using PetFinderApi.Data.Entities;
 
-namespace webApiPet.Controllers;
+namespace PetFinderApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -26,7 +26,7 @@ public class FileController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
-    #region
+    // #region
     // GET: api/<FileController>
     //[HttpGet]
     //public IEnumerable<string> Get()
@@ -58,5 +58,5 @@ public class FileController : ControllerBase
     //public void Delete(int id)
     //{
     //}
-    #endregion
+    // #endregion
 }
