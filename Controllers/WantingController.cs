@@ -19,11 +19,11 @@ public class WantingController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Wanting>>> GetAllWanting()
+    public async Task<ActionResult<WantingListResponse>> GetAllWanting()
     {
         var wantings = await _service.GetAll();
-        //make wantingresponselist
-        return Ok(wantings);
+        var WantingsToList = mapper.getAll(wantings);
+        return Ok(WantingsToList);
     }
 
     [HttpGet("{id}")]
@@ -31,8 +31,8 @@ public class WantingController : ControllerBase
     {
         var wanting = await _service.GetOne(id);
         if (wanting == null) return NotFound();
-        //make wantingresponse
-        return Ok(wanting);
+        var response = mapper.makeOne(wanting);
+        return Ok(response);
     }
 
     [HttpPost]

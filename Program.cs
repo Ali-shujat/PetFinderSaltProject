@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<PetFinderContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("testingContext") ?? throw new InvalidOperationException("Connection string 'CDsContext' not found.")));
 
-builder.Services.AddScoped<IWantingService, WantingRepo>();
+builder.Services.AddScoped<IWantingService, WantingService>();
 builder.Services.AddScoped<ISightingService, SightingRepo>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
