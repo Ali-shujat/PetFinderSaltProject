@@ -5,7 +5,6 @@ namespace PetFinderApi.Models;
 
 public class Sighting
 {
-    [Key]
     public int Id { get; set; }
     public double Latitud { get; set; }
     public double Longitud { get; set; }

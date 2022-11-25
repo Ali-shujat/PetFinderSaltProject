@@ -4,9 +4,7 @@ namespace PetFinderApi.Models;
 
     public class Person
     {
-        [Key]
         public int Id { get; set; }
-        [Required]
         public string? FirstName { get; set; }
         public string? Surname { get; set; }
         public string? Phone { get; set; }
