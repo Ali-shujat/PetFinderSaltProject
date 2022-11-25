@@ -4,15 +4,13 @@ using PetFinderApi.Data;
 using PetFinderApi.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<PetFinderContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("testingContext") ?? throw new InvalidOperationException("Connection string 'testingContext' not found.")));
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<PetFinderContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("testingContext") ?? throw new InvalidOperationException("Connection string 'CDsContext' not found.")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("petFinderContext") ?? throw new InvalidOperationException("Connection string 'CDsContext' not found.")));
 
 builder.Services.AddScoped<IWantingService, WantingService>();
 builder.Services.AddScoped<ISightingService, SightingRepo>();

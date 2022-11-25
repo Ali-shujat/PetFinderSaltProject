@@ -28,7 +28,8 @@ public class WantingService : IWantingService
     }
     public async Task<Wanting> Create(Wanting wanting)
     {
-        var made = await _context.Wanting.AddAsync(wanting);
-        return made.Entity;
+        await _context.Wanting.AddAsync(wanting);
+        await _context.SaveChangesAsync();
+        return wanting;
     }
 }
