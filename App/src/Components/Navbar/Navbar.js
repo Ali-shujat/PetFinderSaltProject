@@ -11,10 +11,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import AdbIcon from '@mui/icons-material/Highlight';
 import { Link } from 'react-router-dom';
 
-const pages = ['Map', 'ReportLostCat', 'About'];
+const pages = ['Map', 'ReportLostCat', 'ReportFoundCat', 'About'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
@@ -53,11 +53,11 @@ function Navbar() {
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
-                color: 'inherit',
+                color: 'black',
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              PetFinder
             </Typography>
           </Link>
 
@@ -92,7 +92,10 @@ function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page}
+                  onClick={handleCloseNavMenu}
+                  component={Link} to={page}
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -115,13 +118,14 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            PET FINDER
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
+                component={Link} to={page}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -160,7 +164,7 @@ function Navbar() {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </AppBar >
   );
 }
 export default Navbar;

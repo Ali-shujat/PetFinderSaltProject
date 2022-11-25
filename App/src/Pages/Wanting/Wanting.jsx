@@ -1,25 +1,27 @@
 import React from 'react';
-import { useRef } from "react";
+import { useState } from "react";
 import { Divider, Typography, Input, Button, Box, Container, TextField, FormControl } from '@mui/material';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './Wanting.css';
+import SendIcon from '@mui/icons-material/Send';
 
 function Wanting() {
-    const ownerName = useRef("");
-    const email = useRef("");
-    const catName = useRef("");
-    const position = useRef("");
-    const evenInfo = useRef("");
+    const [ownerName, setOwnerName] = useState('');
+    const [email, setEmail] = useState('');
+    const [catName, setCatName] = useState('');
+    const [position, setPosition] = useState('');
+    const [eventInfo, setEventInfo] = useState('');
+
 
     //const navigate = useNavigate();
     function wantingHandler() {
         var payload = {
-            OwnerName: ownerName.current.value,
-            Email: email.current.value,
-            CatName: catName.current.value,
-            Position: position.current.focus(),
-            EventInfo: evenInfo.current.focus(),
+            OwnerName: ownerName,
+            Email: email,
+            CatName: catName,
+            Position: position,
+            EventInfo: eventInfo,
         };
         console.log(payload);
         axios
@@ -37,50 +39,52 @@ function Wanting() {
             <Container
                 variant="outlined"
                 sx={{ width: 400, maxWidth: '100%', gap: 1.5 }}>
-                <Typography variant="h4" color="inherit" noWrap>
-                    Pet Finder Form
+                <Typography variant="h5" color="inherit" noWrap sx={{color:'DarkMagenta',m:1 }}>
+                    <b>PET FINDER FORM</b>
                 </Typography>
-                <Divider />
+        
                 <Box component="form"
                     sx={{
-                        '& .MuiTextField-root': { m: 1, width: '25ch' },
+                        '& .MuiTextField-root': { m: 1, mt: 2, width: '30ch' },
                     }}
                     noValidate
                 >
-
-                    <input style={{ width: '30ch', margin: '1rem' }}
-                        placeholder="Please enter owner name"
-                        ref={ownerName}
-                        type="text"
+                    <TextField
+                        id="ownerName"
+                        placeholder="Please enter your name"
+                        label="Owner Name"
+                        value={ownerName}
+                        onChange={e => setOwnerName(e.target.value)}
                     />
-                    <input style={{ width: '30ch', margin: '1rem' }}
+
+                    <TextField
+                        label="Email"
                         placeholder="Please enter your email"
-                        ref={email}
-                        type="text"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                     />
-                    <FormControl>
-                        <TextField
-                            helperText="Please enter your cat name"
-                            id="catName"
-                            label="Cat Name"
-                            ref={catName}
-                        />
-                        <TextField
-                            helperText="Please enter your Location"
-                            id="position"
-                            label="Cat Location"
-                            ref={position}
-                        />
-                        <TextField
-                            helperText="Please enter event info"
-                            id="eventInfo"
-                            label="Event information"
-                            ref={evenInfo}
-                        />
-                    </FormControl>
-
+                    <TextField
+                        id="catName"
+                        placeholder="Please enter cat name"
+                        label="cat Name"
+                        value={catName}
+                        onChange={e => setCatName(e.target.value)}
+                    />
+                    <TextField
+                        label="Location"
+                        placeholder="Please enter your Location"
+                        value={position}
+                        onChange={e => setPosition(e.target.value)}
+                    />
+                    <TextField
+                        label="Event Information"
+                        placeholder="Please enter event info"
+                        minRows={3}
+                        value={eventInfo}
+                        onChange={e => setEventInfo(e.target.value)}
+                    />
                 </Box>
-                <Button variant="contained" onClick={wantingHandler} sx={{ mt: 3, ml: 1 }}>Submit</Button>
+                <Button variant="contained" color="success" endIcon={<SendIcon />} onClick={wantingHandler} sx={{ mt: 3 }}>Submit</Button>
             </Container>
         </div>
     )

@@ -6,7 +6,10 @@ import Container from '@mui/material/Container';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
 import { Route, Routes } from "react-router-dom";
-
+import BottomNav from './Components/BottomNav/BottomNav';
+import Sighter from './Pages/Sighter/Sighter';
+import Wanting from './Pages/Wanting/Wanting';
+import Footer from './Components/Footer/Footer';
 
 function App() {
 
@@ -14,10 +17,10 @@ function App() {
   const kattTheme = createTheme({
     palette: {
       primary: {
-        light: '#e2a2b4',
-        main: '#c44569',
-        dark: '#622335',
-        contrastText: '#fff5e2',
+        light: '#549caa',
+        main: '#0b7285',
+        dark: '#08505d',
+        contrastText: '#010b0d',
 
       },
       secondary: {
@@ -40,16 +43,17 @@ function App() {
           <Routes>
             <Route path="" element={<Frontpage />} />
             <Route path="/" element={<Frontpage />} />
-            <Route path="/reportsighting" element={<Frontpage />} />
             <Route path="/map" element={<Map />} />
-            <Route path="/login" element={<Frontpage />} />
+            <Route path="/reportlostcat" element={<Wanting />} />
+            <Route path="/reportfoundcat" element={<Sighter />} />
             <Route path="/about" element={<Frontpage />} />
           </Routes>
         </main>
 
-        <footer>
-          Footer
-        </footer>
+        {/* <footer> */}
+        {/* </footer> */}
+        <Footer />
+
       </Container>
 
     </ThemeProvider>
