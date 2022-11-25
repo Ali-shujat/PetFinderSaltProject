@@ -10,39 +10,38 @@ function Wanting() {
     const [ownerName, setOwnerName] = useState('');
     const [email, setEmail] = useState('');
     const [catName, setCatName] = useState('');
-    const [position, setPosition] = useState('');
+    const [position, setPosition] = useState([]);
     const [eventInfo, setEventInfo] = useState('');
 
 
     //const navigate = useNavigate();
-    function wantingHandler() {
-        var payload = {
-            OwnerName: ownerName,
-            Email: email,
-            CatName: catName,
-            Position: position,
-            EventInfo: eventInfo,
-        };
-        console.log(payload);
-        axios
-            .post("https://localhost:7164/api/Cats/wanting", payload)
-            .then((response) => {
-                //navigate("/");
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error.response);
-            });
+    const wantingHandler = async () => {
+        try {
+            const payload = {
+                OwnerName: ownerName,
+                Email: email,
+                CatName: catName,
+                Position: [90.45, 89.67],
+                EventInfo: eventInfo,
+            };
+            console.log(payload);
+
+            const response = await axios.post("http://localhost:5110/api/Wanting", payload);
+            console.log(response);
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
     return (
         <div className='wanting'>
             <Container
                 variant="outlined"
                 sx={{ width: 400, maxWidth: '100%', gap: 1.5 }}>
-                <Typography variant="h5" color="inherit" noWrap sx={{color:'DarkMagenta',m:1 }}>
+                <Typography variant="h5" color="inherit" noWrap sx={{ color: 'DarkMagenta', m: 1 }}>
                     <b>PET FINDER FORM</b>
                 </Typography>
-        
+
                 <Box component="form"
                     sx={{
                         '& .MuiTextField-root': { m: 1, mt: 2, width: '30ch' },
