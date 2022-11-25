@@ -6,13 +6,7 @@ namespace PetFinderApi.Models;
 
 public class WantingListResponse
 {
-   // public List<Wanting
-    //TODO: check håkans!
-    [Required]
-    public string CatName { get; set; }
-    [Required]
-    public double[] Position { get; set; }
-    [Required]
-    public string EventInfo { get; set; }
-    //public string pictureUri
+public List<WantingListObjResponse> Wantings {get; set; }
+public string Next {get; set; }
+public string Previous {get; set; }
 }

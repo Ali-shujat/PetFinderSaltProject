@@ -19,11 +19,11 @@ public class WantingController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Wanting>>> GetAllWanting()
+    public async Task<ActionResult<WantingListResponse>> GetAllWanting()
     {
         var wantings = await _service.GetAll();
-        //make wantingresponselist
-        return Ok(wantings);
+        var WantingsToList = mapper.getAll(wantings);
+        return Ok(WantingsToList);
     }
 
     [HttpGet("{id}")]
@@ -31,36 +31,15 @@ public class WantingController : ControllerBase
     {
         var wanting = await _service.GetOne(id);
         if (wanting == null) return NotFound();
-        //make wantingresponse
-        return Ok(wanting);
+        var response = mapper.makeOne(wanting);
+        return Ok(response);
     }
  
     [HttpPost]
     public async Task<ActionResult<Wanting>> Create(WantingRequest request)
     {
-       // var wanting = mapper.WantingReqToWanting(request);
-        var wanting = new Wanting
-        {
-            Cat = new Cat
-            {
-                Name = request.CatName,
-                Owner = new Person
-                {
-                    FirstName = request.OwnerName
-                }
-            },
-            EventInfo = request.EventInfo,
-            Latitud = request.Position[0],
-            Longitud = request.Position[1],
-        };
-        var person = new Person {FirstName = request.OwnerName};
-        _context.Person.Add(person);
-      //   _context.Wanting.Add(wanting);
-        await _context.SaveChangesAsync();
-        return wanting;
-
-        // var made = await _service.Create(wanting);
-        // return Ok(made.Id);
-        // return CreatedAtAction("GetOneWanting", made.Id, made);
+        var wanting = mapper.WantingReqToWanting(request);
+        var made = await _service.Create(wanting);
+        return Ok(made);
     }
 }

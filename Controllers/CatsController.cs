@@ -29,7 +29,7 @@ namespace PetFinderApi.Controllers
           {
               return NotFound();
           }
-            return await _context.Cat.ToListAsync();
+            return await _context.Cat.Include(c => c.Owner).ToListAsync();
         }
 
         // GET: api/Cats/5
