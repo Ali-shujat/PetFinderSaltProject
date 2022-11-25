@@ -54,7 +54,7 @@ public class Mapper
         .Select(w => new WantingListObjResponse
         {
             CatName = w.Cat.Name!,
-            EventInfo = w.EventInfo,
+            EventInfo = w.EventInfo!,
             DetailedUri = w.Id.ToString()
         }).ToList();
         return new WantingListResponse
@@ -75,7 +75,7 @@ public class Mapper
             Size = wanting.Cat.Size,
             Eyecolor = wanting.Cat.Eyecolor,
             CoatLength = wanting.Cat.CoatLength,
-            OwnerFirstName = wanting.Cat.Owner.FirstName,
+            OwnerFirstName = wanting.Cat.Owner!.FirstName,
             OwnerSurname = wanting.Cat.Owner.Surname,
             OwnerEmail = wanting.Cat.Owner.Email,
             OwnerPhone = wanting.Cat.Owner.Phone

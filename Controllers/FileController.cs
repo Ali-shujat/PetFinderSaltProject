@@ -12,7 +12,7 @@ public class FileController : ControllerBase
     {
         try
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file.FileName);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file.FileName!);
 
             using (Stream stream = new FileStream(path, FileMode.Create))
             {
