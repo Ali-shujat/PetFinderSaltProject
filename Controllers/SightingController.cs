@@ -35,7 +35,7 @@ public class SightingController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Sighting>> Create(SightingRequest request)
     {
-        var Sighting = new Sighting
+        var sighting = new Sighting
         {
             Cat = new Cat
             {
@@ -55,7 +55,8 @@ public class SightingController : ControllerBase
         {
             return Problem("Entity set 'Sighting' is null.");
         }
-        await _context.Sighting.AddAsync(Sighting);
-        return Sighting;
+        _context.Sighting.Add(sighting);
+        await _context.SaveChangesAsync();
+        return CreatedAtAction("Create", new { id = sighting.Id }, sighting);
     }
 }
