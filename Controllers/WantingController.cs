@@ -34,12 +34,28 @@ public class WantingController : ControllerBase
         var response = mapper.makeOne(wanting);
         return Ok(response);
     }
- 
+
     [HttpPost]
     public async Task<ActionResult<Wanting>> Create(WantingRequest request)
     {
-        var wanting = mapper.WantingReqToWanting(request);
-        var made = await _service.Create(wanting);
-        return Ok(made);
+        var newCat = new Cat()
+        {
+            Name = request.CatName,
+            Owner = new Person()
+            {
+                FirstName = request.OwnerName
+            }
+        };
+        var wanting = new Wanting
+        {
+            Cat = newCat,
+            EventInfo = request.EventInfo,
+            Latitud = request.Position[0],
+            Longitud = request.Position[1],
+        };
+
+        _context.Wanting.Add(wanting);
+        await _context.SaveChangesAsync();
+        return Ok(wanting);
     }
 }

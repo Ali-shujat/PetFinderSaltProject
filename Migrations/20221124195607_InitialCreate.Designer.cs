@@ -11,8 +11,8 @@ using PetFinderApi.Data;
 namespace testing.Migrations
 {
     [DbContext(typeof(PetFinderContext))]
-    [Migration("20221123102558_WantingTable")]
-    partial class WantingTable
+    [Migration("20221124195607_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace testing.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("testing.Data.Entities.Cat", b =>
+            modelBuilder.Entity("PetFinderApi.Models.Cat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,31 +33,40 @@ namespace testing.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AdditionalInfo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Breed")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CoatLength")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Eyecolor")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
@@ -66,7 +75,7 @@ namespace testing.Migrations
                     b.ToTable("Cat");
                 });
 
-            modelBuilder.Entity("testing.Data.Entities.Person", b =>
+            modelBuilder.Entity("PetFinderApi.Models.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,24 +84,27 @@ namespace testing.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Person");
                 });
 
-            modelBuilder.Entity("testing.Data.Entities.Wanting", b =>
+            modelBuilder.Entity("PetFinderApi.Models.Sighting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,7 +116,36 @@ namespace testing.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("EventInfo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<double>("Latitud")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Longitud")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CatId");
+
+                    b.ToTable("Sighting");
+                });
+
+            modelBuilder.Entity("PetFinderApi.Models.Wanting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CatId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EventInfo")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<double>("Latitud")
                         .HasColumnType("float");
@@ -119,9 +160,9 @@ namespace testing.Migrations
                     b.ToTable("Wanting");
                 });
 
-            modelBuilder.Entity("testing.Data.Entities.Cat", b =>
+            modelBuilder.Entity("PetFinderApi.Models.Cat", b =>
                 {
-                    b.HasOne("testing.Data.Entities.Person", "Owner")
+                    b.HasOne("PetFinderApi.Models.Person", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -130,9 +171,20 @@ namespace testing.Migrations
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("testing.Data.Entities.Wanting", b =>
+            modelBuilder.Entity("PetFinderApi.Models.Sighting", b =>
                 {
-                    b.HasOne("testing.Data.Entities.Cat", "Cat")
+                    b.HasOne("PetFinderApi.Models.Cat", "Cat")
+                        .WithMany()
+                        .HasForeignKey("CatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cat");
+                });
+
+            modelBuilder.Entity("PetFinderApi.Models.Wanting", b =>
+                {
+                    b.HasOne("PetFinderApi.Models.Cat", "Cat")
                         .WithMany()
                         .HasForeignKey("CatId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PetFinderApi.Models;
 
-public class Wanting
+public class Sighting
 {
     public int Id { get; set; }
     public double Latitud { get; set; }
