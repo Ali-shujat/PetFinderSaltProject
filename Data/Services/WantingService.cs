@@ -16,7 +16,7 @@ public class WantingService : IWantingService
         if(wantings == null) return new List<Wanting>();
         return wantings;
     }
-    public async Task<Wanting> GetOne(int id)
+    public async Task<Wanting>? GetOne(int id)
     {
         if (await _context.Wanting.ToListAsync() == null) return null;
         //var wanting = await _context.Wanting.FindAsync(id);
