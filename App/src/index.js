@@ -5,15 +5,22 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
+root.render( //Revisar React.StrictMode
+  <React.StrictMode> 
+  <Auth0Provider
+    domain="dev-pn4jxxglzdbftvsj.us.auth0.com"
+    clientId="MwqbDNhd8R5ofhGidaLaghRPeRKlxFHm"
+    redirectUri={window.location.origin}
+  >
     <BrowserRouter>
       <CssBaseline enableColorScheme={true}>
         <App />
       </CssBaseline>
     </BrowserRouter>
+    </Auth0Provider>
   </React.StrictMode>
 );
 

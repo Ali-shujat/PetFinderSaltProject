@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import './Wanting.css';
 import SendIcon from '@mui/icons-material/Send';
+import { FileUpload } from '../../Components/FileUpload/FileUpload';
 
 function Wanting() {
     const [ownerName, setOwnerName] = useState('');
@@ -12,6 +13,7 @@ function Wanting() {
     const [catName, setCatName] = useState('');
     const [position, setPosition] = useState([]);
     const [eventInfo, setEventInfo] = useState('');
+    const [image, setImage] = useState('');
 
 
     //const navigate = useNavigate();
@@ -23,11 +25,28 @@ function Wanting() {
                 CatName: catName,
                 Position: [90.45, 89.67],
                 EventInfo: eventInfo,
+                Image: image,
             };
             console.log(payload);
 
             const response = await axios.post("http://localhost:5110/api/Wanting", payload);
             console.log(response);
+            
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    const imageHandler = async () => {
+        try {
+            const payload2 = {
+                Image: image,
+            };
+            console.log(payload2);
+
+            const response2 = await axios.post("http://localhost:5110/api/File/UploadFile", payload2);
+            console.log(response2);
         }
         catch (e) {
             console.log(e);
@@ -82,10 +101,17 @@ function Wanting() {
                         value={eventInfo}
                         onChange={e => setEventInfo(e.target.value)}
                     />
+                    <TextField
+                        id="image"
+                        label="Image"
+                        placeholder="Please upload an image"
+                        value={image}
+                        onChange={e => setImage(e.target.value)}
+                    />
                 </Box>
-                <Button variant="contained" color="success" endIcon={<SendIcon />} onClick={wantingHandler} sx={{ mt: 3 }}>Submit</Button>
+                <Button variant="contained" color="success" endIcon={<SendIcon />} onClick={imageHandler} sx={{ mt: 3 }}>Submit</Button>
             </Container>
-        </div>
+        </div>        
     )
 }
 

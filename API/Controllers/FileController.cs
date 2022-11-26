@@ -1,5 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PetFinderApi.Models;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
 
 namespace PetFinderApi.Controllers;
 
@@ -7,56 +13,59 @@ namespace PetFinderApi.Controllers;
 [ApiController]
 public class FileController : ControllerBase
 {
-    [HttpPost]
-    public ActionResult Post([FromForm] FileModel file)
+    private readonly IConfiguration _configuration;
+
+    public FileController(IConfiguration configuration)
     {
-        try
-        {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file.FileName);
-
-            using (Stream stream = new FileStream(path, FileMode.Create))
-            {
-                file.FormFile.CopyTo(stream);
-            }
-
-            return StatusCode(StatusCodes.Status201Created);
-        }
-        catch (Exception)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError);
-        }
+        _configuration = configuration;
     }
-    #region
-    // GET: api/<FileController>
-    //[HttpGet]
-    //public IEnumerable<string> Get()
-    //{
-    //    return new string[] { "value1", "value2" };
-    //}
 
-    //// GET api/<FileController>/5
-    //[HttpGet("{id}")]
-    //public string Get(int id)
-    //{
-    //    return "value";
-    //}
+    [HttpPost(nameof(UploadFile))]
+    public async Task<IActionResult> UploadFile(IFormFile files)
+    {
+        string systemFileName = files.FileName;
+        string blobstorageconnection = _configuration.GetValue<string>("BlobConnectionString");
+        // Retrieve storage account from connection string.
+        CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
+        // Create the blob client.
+        CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
+        // Retrieve a reference to a container.
+        CloudBlobContainer container = blobClient.GetContainerReference(_configuration.GetValue<string>("BlobContainerName"));
+        // This also does not make a service call; it only creates a local object.
+        CloudBlockBlob blockBlob = container.GetBlockBlobReference(systemFileName);
+        await using (var data = files.OpenReadStream())
+        {
+            await blockBlob.UploadFromStreamAsync(data);
+        }
+        return Ok("File Uploaded Successfully");
+    }
+    [HttpPost(nameof(DownloadFile))]
+    public async Task<IActionResult> DownloadFile(string fileName)
+    {
+        CloudBlockBlob blockBlob;
+        await using (MemoryStream memoryStream = new MemoryStream())
+        {
+            string blobstorageconnection = _configuration.GetValue<string>("BlobConnectionString");
+            CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
+            CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
+            CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference(_configuration.GetValue<string>("BlobContainerName"));
+            blockBlob = cloudBlobContainer.GetBlockBlobReference(fileName);
+            await blockBlob.DownloadToStreamAsync(memoryStream);
+        }
 
-    // POST api/<FileController>
-    //[HttpPost]
-    //public void Post([FromBody] string value)
-    //{
-    //}
-
-    // PUT api/<FileController>/5
-    //[HttpPut("{id}")]
-    //public void Put(int id, [FromBody] string value)
-    //{
-    //}
-
-    //// DELETE api/<FileController>/5
-    //[HttpDelete("{id}")]
-    //public void Delete(int id)
-    //{
-    //}
-    #endregion
+        Stream blobStream = blockBlob.OpenReadAsync().Result;
+        return File(blobStream, blockBlob.Properties.ContentType, blockBlob.Name);
+    }
+    [HttpDelete(nameof(DeleteFile))]
+    public async Task<IActionResult> DeleteFile(string fileName)
+    {
+        string blobstorageconnection = _configuration.GetValue<string>("BlobConnectionString");
+        CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
+        CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
+        string strContainerName = _configuration.GetValue<string>("BlobContainerName");
+        CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference(strContainerName);
+        var blob = cloudBlobContainer.GetBlobReference(fileName);
+        await blob.DeleteIfExistsAsync();
+        return Ok("File Deleted");
+    }
 }

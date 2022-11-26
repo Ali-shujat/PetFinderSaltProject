@@ -4,9 +4,13 @@ import landingimage from "../../images/landingcat.png";
 import { Button } from "@mui/material";
 // import landingimage from "./images/landingcat.png";
 import "./Frontpage.css";
+import LoginButton from "../../Components/Login/LoginButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Front = () => {
-  return (
+  const { isAuthenticated } = useAuth0();
+
+  return (isAuthenticated && (
     <div
       className="landingimage"
       style={{ backgroundImage: `url(${landingimage})` }}
@@ -51,8 +55,7 @@ const Front = () => {
         </div>
       </div>
       {/* <Link to="/map">Sightings map</Link> */}
-    </div>
-  );
+    </div>))
 };
 
 export default Front;
