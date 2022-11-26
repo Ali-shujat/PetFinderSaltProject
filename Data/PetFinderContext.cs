@@ -1,99 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PetFinderApi.Models;
 
-namespace PetFinderApi.Data
+namespace PetFinderApi.Data;
+
+public class PetFinderContext : DbContext
 {
-    public class PetFinderContext : DbContext
+    public PetFinderContext(DbContextOptions<PetFinderContext> options)
+        : base(options)
     {
-        public PetFinderContext (DbContextOptions<PetFinderContext> options)
-            : base(options)
+    }
+
+    public DbSet<Cat> Cat { get; set; } = default!;
+
+    public DbSet<Person> Person { get; set; } = default!;
+
+    public DbSet<Wanting> Wanting { get; set; } = default!;
+
+    public DbSet<Sighting> Sighting { get; set; } = default!;
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured) // The DB options should be set from the active project (i.e. live or test)
+            optionsBuilder.UseSqlServer("PetFinderContext" ??
+                                        throw new InvalidOperationException(
+                                            "Connection string 'PetFinderContext' not found."));
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Cat>(entity =>
         {
-        }
+            entity.HasKey(e => e.Id);
 
-        public DbSet<PetFinderApi.Models.Cat> Cat { get; set; } = default!;
-
-        public DbSet<PetFinderApi.Models.Person> Person { get; set; } = default!;
-
-        public DbSet<PetFinderApi.Models.Wanting> Wanting { get; set; } = default!;
-
-        public DbSet<PetFinderApi.Models.Sighting> Sighting { get; set; } = default!;
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured) // The DB options should be set from the active project (i.e. live or test)
-            {
-                optionsBuilder.UseSqlServer("PetFinderContext" ?? throw new InvalidOperationException("Connection string 'PetFinderContext' not found."));
-            }
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Cat>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.Name)
+            entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(50);
 
-                entity.Property(e => e.Image)
+            entity.Property(e => e.Image)
                 .HasMaxLength(50);
 
-                entity.Property(e => e.AdditionalInfo)
+            entity.Property(e => e.AdditionalInfo)
                 .HasMaxLength(500);
 
-                entity.Property(e => e.Breed)
+            entity.Property(e => e.Breed)
                 .HasMaxLength(20);
 
-                entity.Property(e => e.Size)
+            entity.Property(e => e.Size)
                 .HasMaxLength(10);
 
-                entity.Property(e => e.Eyecolor)
+            entity.Property(e => e.Eyecolor)
                 .HasMaxLength(10);
 
-                entity.Property(e => e.CoatLength)
+            entity.Property(e => e.CoatLength)
                 .HasMaxLength(20);
 
-                entity.Property(e => e.Gender)
+            entity.Property(e => e.Gender)
                 .HasMaxLength(10);
-            });
+        });
 
-            modelBuilder.Entity<Person>(entity =>
-            {
-                entity.HasKey(e => e.Id);
+        modelBuilder.Entity<Person>(entity =>
+        {
+            entity.HasKey(e => e.Id);
 
-                entity.Property(e => e.FirstName)
+            entity.Property(e => e.FirstName)
                 .HasMaxLength(50);
 
-                entity.Property(e => e.Surname)
+            entity.Property(e => e.Surname)
                 .HasMaxLength(50);
 
-                entity.Property(e => e.Phone)
+            entity.Property(e => e.Phone)
                 .HasMaxLength(15);
 
-                entity.Property(e => e.Email)
+            entity.Property(e => e.Email)
                 .HasMaxLength(20);
-            });
+        });
 
-            modelBuilder.Entity<Wanting>(entity =>
-            {
-                entity.HasKey(e => e.Id);
+        modelBuilder.Entity<Wanting>(entity =>
+        {
+            entity.HasKey(e => e.Id);
 
-                entity.Property(e => e.EventInfo)
+            entity.Property(e => e.EventInfo)
                 .HasMaxLength(500);
-            });
+        });
 
-            modelBuilder.Entity<Sighting>(entity =>
-            {
-                entity.HasKey(e => e.Id);
+        modelBuilder.Entity<Sighting>(entity =>
+        {
+            entity.HasKey(e => e.Id);
 
-                entity.Property(e => e.EventInfo)
+            entity.Property(e => e.EventInfo)
                 .HasMaxLength(500);
-            });
-        }
+        });
     }
 }

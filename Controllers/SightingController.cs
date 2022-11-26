@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using PetFinderApi.Data;
 using PetFinderApi.Data.Services;
 using PetFinderApi.Models;
-using PetFinderApi.Data;
 
 namespace PetFinderApi.Controllers;
 
@@ -10,7 +10,8 @@ namespace PetFinderApi.Controllers;
 public class SightingController : ControllerBase
 {
     private readonly PetFinderContext _context;
-    private ISightingService _service;
+    private readonly ISightingService _service;
+
     public SightingController(ISightingService service, PetFinderContext context)
     {
         _service = service;
@@ -48,13 +49,10 @@ public class SightingController : ControllerBase
             },
             EventInfo = request.EventInfo,
             Latitud = request.Position[0],
-            Longitud = request.Position[1],
+            Longitud = request.Position[1]
         };
 
-        if (_context.Sighting == null)
-        {
-            return Problem("Entity set 'Sighting' is null.");
-        }
+        if (_context.Sighting == null) return Problem("Entity set 'Sighting' is null.");
         _context.Sighting.Add(sighting);
         await _context.SaveChangesAsync();
         return CreatedAtAction("Create", new { id = sighting.Id }, sighting);

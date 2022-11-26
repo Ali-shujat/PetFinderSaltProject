@@ -2,9 +2,9 @@ using PetFinderApi.Models;
 
 namespace PetFinderApi.Data.Services;
 
-public interface ISightingService 
+public interface ISightingService
 {
     Task<List<Sighting>> GetAll();
     Task<Sighting> GetOne(int id);
-    Sighting Create(Sighting sighting);    
+    Sighting Create(Sighting sighting);
 }

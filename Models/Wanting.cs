@@ -1,6 +1,3 @@
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-
 namespace PetFinderApi.Models;
 
 public class Wanting

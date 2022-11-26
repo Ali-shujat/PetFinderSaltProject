@@ -12,7 +12,7 @@ public class FileController : ControllerBase
     {
         try
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file.FileName!);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file.FileName!);
 
             using (Stream stream = new FileStream(path, FileMode.Create))
             {
@@ -26,7 +26,9 @@ public class FileController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
+
     #region
+
     // GET: api/<FileController>
     //[HttpGet]
     //public IEnumerable<string> Get()
@@ -58,5 +60,6 @@ public class FileController : ControllerBase
     //public void Delete(int id)
     //{
     //}
+
     #endregion
 }

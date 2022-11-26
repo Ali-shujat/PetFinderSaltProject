@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PetFinderApi.Data;
 using PetFinderApi.Data.Services;
 using PetFinderApi.Models;
-using PetFinderApi.Data;
 
 namespace PetFinderApi.Controllers;
 
@@ -9,9 +9,10 @@ namespace PetFinderApi.Controllers;
 [ApiController]
 public class WantingController : ControllerBase
 {
-    private Mapper mapper = new Mapper();
     private readonly PetFinderContext _context;
-    private IWantingService _dbservice;
+    private readonly IWantingService _dbservice;
+    private readonly Mapper mapper = new();
+
     public WantingController(IWantingService service, PetFinderContext context)
     {
         _dbservice = service;
