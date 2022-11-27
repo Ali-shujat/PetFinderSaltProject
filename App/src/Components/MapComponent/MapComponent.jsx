@@ -8,7 +8,7 @@ import {
   useMapEvents,
 } from "react-leaflet";
 
-function MapComponent() {
+function MapComponent(props) {
   const [catCoords, setCatCoords] = useState([]);
 
   // useEffect(() => {
@@ -33,6 +33,7 @@ function MapComponent() {
       },
       locationfound: (location) => {
         console.log("location found:", location);
+        // setCatCoords(location)
       },
     });
     return null;
