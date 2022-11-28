@@ -7,6 +7,7 @@ import {
   Popup,
   useMapEvents,
 } from "react-leaflet";
+import Cards from "../Cards/Cards";
 
 function MapComponent() {
   const [catCoords, setCatCoords] = useState([]);
@@ -41,13 +42,13 @@ function MapComponent() {
   return (
     <>
       <h1>Map</h1>
-      <MapContainer center={[59.3293, 18.0686]} zoom={11}>
+      <MapContainer center={[59.3293, 18.0686]} zoom={11} >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {testingMarkers.map((x) => (
-          <Marker position={x}>
+          <Marker position={x} key={x}>
             <Popup>
               <h3>Sighting</h3>
               <b>Latitude:</b> {x[0]} <br />
@@ -59,6 +60,7 @@ function MapComponent() {
         ))}
         <MapClicker />
       </MapContainer>
+      <Cards/>
     </>
   );
 }
