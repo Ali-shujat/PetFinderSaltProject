@@ -3,25 +3,26 @@ import { Input, Button, Box, TextField } from '@mui/material';
 import React, { useState } from "react";
 import axios from "axios";
 
-export const FileUpload = () => {
+
+export const ImageUpload = () => {
   const [file, setFile] = useState();
-  const [fileName, setFileName] = useState();
   const [textValue, setTextValue] = useState("");
   const onTextChange = (e) => setTextValue(e.target.value);
   const handleSubmit = () => console.log("i am click");
   const handleReset = () => setTextValue("something");
+  
   const saveFile = (e) => {
     console.log(e.target.files[0]);
     setFile(e.target.files[0]);
-    setFileName(e.target.files[0].name);
   };
 
   const uploadFile = async (e) => {
     console.log(file);
     const formData = new FormData();
-    formData.append("formFile", file);
+    formData.append("image", file);
     try {
       const res = await axios.post("https://petfinderapi.azurewebsites.net/api/Wanting", formData);
+      
       console.log(res);
     } catch (ex) {
       console.log(ex);
