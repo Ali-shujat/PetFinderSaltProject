@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import landingimage from "../../images/landingcat.png";
+import landingimage from "../../images/landingcat2.png";
 import { Button } from "@mui/material";
 // import landingimage from "./images/landingcat.png";
 import "./Frontpage.css";

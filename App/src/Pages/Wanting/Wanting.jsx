@@ -58,7 +58,7 @@ function Wanting() {
           <b>PET FINDER FORM</b>
         </Typography>
 
-        <MapComponent />
+        <MapComponent mapCoordinate={setPosition} />
 
         <Box
           component="form"
@@ -90,6 +90,7 @@ function Wanting() {
           />
           <TextField
             label="Location"
+            disabled
             placeholder="Please enter your Location"
             value={position}
             onChange={(e) => setPosition(e.target.value)}
