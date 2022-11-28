@@ -84,7 +84,7 @@ function Wanting() {
                         onChange={e => setEventInfo(e.target.value)}
                     />
                 </Box>
-                <Button variant="contained" color="success" endIcon={<SendIcon />} onClick={wantingHandler} sx={{ mt: 3 }}>Submit</Button>
+                <Button className='wanting__button' variant="contained" color="success" endIcon={<SendIcon />} onClick={wantingHandler} sx={{ mt: 3 }}>Submit</Button>
             </Container>
         </div>
     )
