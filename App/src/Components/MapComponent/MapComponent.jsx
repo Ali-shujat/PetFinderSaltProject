@@ -7,10 +7,12 @@ import {
   Popup,
   useMapEvents,
 } from "react-leaflet";
+import axios from "axios";
 
 function MapComponent(props) {
   // let [mapCoordinate] = props;
   const [coordinate, setCoordinate] = useState([]);
+  const [mapMarkers, setMapMarkers] = useState([]);
 
   // useEffect(() => {
   //   // Fetch data from the db to get coords and other data
@@ -25,6 +27,38 @@ function MapComponent(props) {
     [59.3293, 18.0686],
     [50, 18],
   ];
+
+  const getWebData = async () => {
+    let apiMarkers = await axios.get(
+      "https://petfinderapi.azurewebsites.net/api/Wanting"
+    );
+    console.log(apiMarkers.data);
+  };
+
+  let markerArray = [];
+
+  useEffect(() => {
+    const getWebData = async () => {
+      let apiMarkers = await axios.get(
+        "https://petfinderapi.azurewebsites.net/api/Wanting"
+      );
+      // console.log(apiMarkers.data.wantings);
+      // apiMarkers.data.wantings.forEach((element) => {
+      //   console.log(element.location);
+      //   // markerArray.push(element.location);
+      console.log("🫤", apiMarkers.data);
+      setMapMarkers(apiMarkers.data.wantings);
+      // setMapMarkers([
+      //   [...mapMarkers],
+      //   [element.location[0], element.location[1]],
+      // ]);
+      //   console.log("🗺️", mapMarkers);
+      // });
+    };
+
+    getWebData().catch(console.error());
+    // console.log(markerArray);
+  }, []);
 
   // For selecting a point on the map, for the submission forms
   // const MapClicker = () => {
@@ -64,13 +98,16 @@ function MapComponent(props) {
 
   ///////////////////////// EXPERIMENTING MAP SOLUTIONS
 
-  const [initialPosition, setInitialPosition] = useState([0, 0]);
+  const [initialPosition, setInitialPosition] = useState([59.273, 18.0286]);
   const [selectedPosition, setSelectedPosition] = useState([0, 0]);
+
+  // const [currentLocation, setCurrentLocation] = useState();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       setInitialPosition([latitude, longitude]);
+      console.log("🏠", latitude, longitude);
     });
   }, []);
 
@@ -78,8 +115,8 @@ function MapComponent(props) {
     const map = useMapEvents({
       click(e) {
         setSelectedPosition([e.latlng.lat, e.latlng.lng]);
-        props.mapCoordinate(selectedPosition.join(", "));
-        console.log(selectedPosition);
+        props.mapCoordinate([e.latlng.lat, e.latlng.lng].join(", "));
+        console.log([e.latlng.lat, e.latlng.lng]);
       },
     });
 
@@ -93,28 +130,26 @@ function MapComponent(props) {
   };
 
   //////////////////////
+  /// testingMarkers.map((x) => (
 
   return (
     <>
       <h1>Map</h1>
-      <MapContainer
-        center={[59.3293, 18.0686]}
-        zoom={11}
-        onClick={(x) => console.log("🐶")}
-      >
+      <MapContainer center={initialPosition} zoom={11}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {/* <MapClicker2 /> */}
-        {testingMarkers.map((x) => (
-          <Marker key={x[0] * Math.random()} position={x}>
+        {mapMarkers.map((x) => (
+          <Marker key={x[0] * Math.random()} position={x.location}>
             <Popup>
               <h3>Sighting</h3>
-              <b>Latitude:</b> {x[0]} <br />
-              <b>Longitude:</b> {x[1]} <br />
+              <b>Latitude:</b> {x.location[0]} <br />
+              <b>Longitude:</b> {x.location[1]} <br />
               <b>Description:</b> Blah <br />
-              <i>Image Link</i>
+              <i>Image Link:</i> {x.pictureUrl}
+              <img src={x.pictureUrl} width="100%"></img>
             </Popup>
           </Marker>
         ))}
