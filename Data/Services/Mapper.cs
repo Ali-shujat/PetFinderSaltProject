@@ -51,12 +51,16 @@ public class Mapper
 
     public WantingListResponse getAll(List<Wanting> wantings)
     {
+        var fileService = new FileService();
         var mappedList = wantings
             .Select(w => new WantingListObjResponse
             {
-                CatName = w.Cat.Name!,
+                id = w.Id,
+                    Location = new double[] { w.Latitud, w.Longitud },
                 EventInfo = w.EventInfo!,
-                DetailedUri = w.Id.ToString()
+                Contactinformation = w.Cat.Owner.Email,
+                DetailedUri = "https://petfinderapi.azurewebsites.net/api/Wanting/" + w.Id.ToString(),
+                PictureUrl = fileService.getPath(w.Id.ToString()),
             }).ToList();
         return new WantingListResponse
         {

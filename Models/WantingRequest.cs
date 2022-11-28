@@ -7,4 +7,5 @@ public class WantingRequest
     public string? CatName { get; set; }
     public double[]? Position { get; set; }
     public string? EventInfo { get; set; }
+    public IFormFile image { get; set; }
 }

@@ -26,4 +26,37 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="API\**" />
+      <Compile Remove="App\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="API\**" />
+      <EmbeddedResource Remove="App\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="API\**" />
+      <None Remove="App\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="API\**" />
+      <Content Remove="App\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="API\bin\Debug\net7.0\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="API\bin\Debug\net7.0\appsettings.json" />
+      <_ContentIncludedByDefault Remove="API\bin\Debug\net7.0\testing.deps.json" />
+      <_ContentIncludedByDefault Remove="API\bin\Debug\net7.0\testing.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="API\obj\Debug\net7.0\project.razor.json" />
+      <_ContentIncludedByDefault Remove="API\obj\Debug\net7.0\staticwebassets.build.json" />
+      <_ContentIncludedByDefault Remove="API\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="API\obj\testing.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="App\build\asset-manifest.json" />
+      <_ContentIncludedByDefault Remove="App\build\manifest.json" />
+    </ItemGroup>
+
 </Project>

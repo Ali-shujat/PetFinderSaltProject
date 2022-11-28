@@ -1,12 +1,17 @@
+using PetFinderApi.Models;
 namespace PetFinderApi.Models;
 
 public class WantingListObjResponse
 {
     public int id { get; set; }
-    public string CatName { get; set; } = null!;
-
+    public string PictureUrl { get; set; } = null!;
     public string EventInfo { get; set; } = null!;
-
-    //public string pictureUri
+    public double[] Location { get; set; }
+    public string Contactinformation { get; set; } = null!;
     public string DetailedUri { get; set; } = null!;
+
+    public WantingListObjResponse()
+    {
+        
+    }
 }

@@ -16,17 +16,17 @@ namespace PetFinderApi.Controllers;
         {  
             _configuration = configuration;  
         }  
+        private readonly string blobstorageconnection = "DefaultEndpointsProtocol=https;AccountName=petblobaccount;AccountKey=1Oa4CeDyrtKAVGnBIweNqXsRus9xkf45xOSRJQ9l+jlspwPlh1E0BlHJJ3SajJuhKHX4uIvB8WHP+AStH6HvLg==;EndpointSuffix=core.windows.net";
+        private readonly string containerName = "petpics";
+
         [HttpPost(nameof(UploadFile))]  
-        public async Task < IActionResult > UploadFile(IFormFile files) {  
-            string systemFileName = files.FileName;  
-            string blobstorageconnection = _configuration.GetValue < string > ("BlobConnectionString");
-            // Retrieve storage account from connection string.    
+        public async Task < IActionResult > UploadFile(IFormFile files)
+        {
+            string systemFileName = "LOTTENPLAYING";//new Guid().ToString(); 
+            //string blobstorageconnection = _configuration.GetValue < string > ("BlobConnectionString");
             CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);  
-            // Create the blob client.    
             CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();  
-            // Retrieve a reference to a container.    
-            CloudBlobContainer container = blobClient.GetContainerReference(_configuration.GetValue < string > ("BlobContainerName"));  
-            // This also does not make a service call; it only creates a local object.    
+            CloudBlobContainer container = blobClient.GetContainerReference(containerName);  
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(systemFileName);  
             await using(var data = files.OpenReadStream()) {  
                 await blockBlob.UploadFromStreamAsync(data);  
