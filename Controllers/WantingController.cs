@@ -4,11 +4,14 @@ using PetFinderApi.Data.Services;
 using PetFinderApi.Models;
 using System.Collections.Generic;  
 using System.IO;  
-using System.Linq;  
+using System.Linq;
+using System.Runtime.InteropServices.JavaScript;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
+using Microsoft.AspNetCore.Http;
+
 
 namespace PetFinderApi.Controllers;
 
@@ -48,42 +51,18 @@ public class WantingController : ControllerBase
     public async Task<ActionResult<Wanting>> Create([FromForm] WantingRequest request)
     {
         var wanting = mapper.WantingReqToWanting(request);
+        var fileName = Guid.NewGuid().ToString() + request.image.FileName;
+        wanting.imageFileName = fileName;
         await _dbservice.Create(wanting);
-        if (request.image == null) return Ok("no image");
+
         CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
-            CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
-            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(wanting.Id.ToString());
-            await using (var data = request.image.OpenReadStream())
-            {
-                await blockBlob.UploadFromStreamAsync(data);
-            }
-            return CreatedAtAction("GetOneWanting", new { id = wanting.Id }, mapper.makeOne(wanting));
+        CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
+        CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+        CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
+        await using (var data = request.image.OpenReadStream())
+        { 
+            await blockBlob.UploadFromStreamAsync(data);
+        }
+        return CreatedAtAction("GetOneWanting", new { id = wanting.Id }, mapper.makeOne(wanting));
     }
-    
-    
-
-
-    
-  
-/*        private readonly string blobstorageconnection = "DefaultEndpointsProtocol=https;AccountName=petblobaccount;AccountKey=1Oa4CeDyrtKAVGnBIweNqXsRus9xkf45xOSRJQ9l+jlspwPlh1E0BlHJJ3SajJuhKHX4uIvB8WHP+AStH6HvLg==;EndpointSuffix=core.windows.net";
-        private readonly string containerName = "petpics";
-
-        [HttpPost(nameof(UploadFile))]  
-        public async Task < IActionResult > UploadFile(IFormFile files) {
-            string systemFileName = files.FileName;  
-            //string blobstorageconnection = _configuration.GetValue < string > ("BlobConnectionString");
-            // Retrieve storage account from connection string.    
-            CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);  
-            // Create the blob client.    
-            CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();  
-            // Retrieve a reference to a container.    
-            CloudBlobContainer container = blobClient.GetContainerReference(containerName);  
-            // This also does not make a service call; it only creates a local object.    
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(systemFileName);  
-            await using(var data = files.OpenReadStream()) {  
-                await blockBlob.UploadFromStreamAsync(data);  
-            }  
-            return Ok("File Uploaded Successfully");  
-        } */  
 }   

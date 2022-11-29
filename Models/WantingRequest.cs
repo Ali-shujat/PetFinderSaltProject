@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 namespace PetFinderApi.Models;
 
 public class WantingRequest

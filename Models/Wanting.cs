@@ -7,4 +7,5 @@ public class Wanting
     public double Longitud { get; set; }
     public string? EventInfo { get; set; }
     public virtual Cat Cat { get; set; } = null!;
+    public string? imageFileName { get; set; }
 }

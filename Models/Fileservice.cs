@@ -18,5 +18,5 @@ public class FileService
     public FileService()
     {}
 
-    public string getPath(string pictureName) => $"https://{blobaccount}.blob.core.windows.net/{blobname}/{pictureName}.{pictureFormat}";
+    public string getPath(string pictureName) => $"https://{blobaccount}.blob.core.windows.net/{blobname}/{pictureName}";
 }

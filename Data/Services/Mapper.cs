@@ -60,7 +60,7 @@ public class Mapper
                 EventInfo = w.EventInfo!,
                 Contactinformation = w.Cat.Owner.Email,
                 DetailedUri = "https://petfinderapi.azurewebsites.net/api/Wanting/" + w.Id.ToString(),
-                PictureUrl = fileService.getPath(w.Id.ToString()),
+                PictureUrl = fileService.getPath(w.imageFileName),
             }).ToList();
         return new WantingListResponse
         {
