@@ -10,7 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Front = () => {
   const { isAuthenticated } = useAuth0();
 
-  return (isAuthenticated && (
+  return(
     <div
       className="landingimage"
       style={{ backgroundImage: `url(${landingimage})` }}
@@ -55,7 +55,7 @@ const Front = () => {
         </div>
       </div>
       {/* <Link to="/map">Sightings map</Link> */}
-    </div>))
+    </div>)
 };
 
 export default Front;
