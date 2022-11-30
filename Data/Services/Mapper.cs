@@ -122,6 +122,7 @@ public class Mapper
         {
             Cat = new Cat
             {
+                Name = "",
                 AdditionalInfo = request.CatDescription,
                 Owner = new Person
                 {
@@ -146,7 +147,7 @@ public class Mapper
             .Select(s => new SightingListObjResponse
             {
                 id = s.Id,
-                    Location = new double[] { s.Latitud, s.Longitud },
+                Location = new double[] { s.Latitud, s.Longitud },
                 EventInfo = s.EventInfo!,
                 Contactinformation = s.Cat.Owner.Email,
                 DetailedUri = "https://petfinderapi.azurewebsites.net/api/Sighting/" + s.Id.ToString(),
