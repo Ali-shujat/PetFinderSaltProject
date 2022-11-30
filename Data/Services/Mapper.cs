@@ -121,7 +121,7 @@ public class Mapper
         {
             Cat = new Cat
             {
-                Name = "Guido",
+                Name = "",
                 AdditionalInfo = request.CatDescription,
                 Owner = new Person
                 {
@@ -130,10 +130,16 @@ public class Mapper
             },
             EventInfo = request.EventInfo
         };
-        if (request.Position != null && request.Position.Length == 2)
+        var makeThree = request.Position.Split(',');
+        makeThree[1] = makeThree[1].Trim().Replace('.', ',');
+        makeThree[0] = makeThree[0].Replace('.', ',');
+        double longi = 0;
+        double lati = 0;
+        if (Double.TryParse(makeThree[0], out lati) &&
+            Double.TryParse(makeThree[1], out longi))
         {
-            sighting.Latitud = request.Position[0];
-            sighting.Longitud = request.Position[1];
+            sighting.Latitud = lati;
+            sighting.Longitud = longi;
         }
 
         return sighting;

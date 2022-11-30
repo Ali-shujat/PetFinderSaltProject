@@ -14,16 +14,23 @@ public class SightingRepo : ISightingService
 
     public async Task<List<Sighting>> GetAll()
     {
-        var sightings = await _context.Sighting.ToListAsync();
+        var sightings = await _context.Sighting
+            .Include(s => s.Cat)
+            .Include(s => s.Cat.Owner)
+            .ToListAsync();
         if (sightings == null) return new List<Sighting>();
         return sightings;
     }
 
-    public async Task<Sighting> GetOne(int id)
+    public async Task<Sighting>? GetOne(int id)
     {
         if (await _context.Sighting.ToListAsync() == null) return null;
-        var sighting = await _context.Sighting.FindAsync(id);
-        return sighting;
+
+        return await _context.Sighting
+            .Where(s => s.Id == id)
+            .Include(s => s.Cat)
+            .Include(s => s.Cat.Owner)
+            .FirstOrDefaultAsync();
     }
 
     public async Task<Sighting> Create(Sighting sighting)

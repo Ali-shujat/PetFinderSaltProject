@@ -13,6 +13,6 @@ public class SightingResponse
     public string? Gender { get; set; }
     public string? InformerFirstName { get; set; }
     public string? InformerSurname { get; set; }
-    public string? InformerPhone { get; set; }
     public string? InformerEmail { get; set; }
+    public string? InformerPhone { get; set; }
 }

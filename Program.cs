@@ -17,7 +17,7 @@ builder.Services.AddControllers();
  //    options.UseSqlServer(builder.Configuration.GetConnectionString("petFinderContext") ??
    //                       throw new InvalidOperationException("Connection string 'CDsContext' not found.")));
 builder.Services.AddDbContext<PetFinderContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("azurePetFinderDb") ??
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Server=tcp:petfinder-project.database.windows.net,1433;Initial Catalog=petfinder;Persist Security Info=False;User ID=Cat;Password=Salt123!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;") ??
                          throw new InvalidOperationException("Connection string 'azurePetFinderDb' not found.")));
 
 builder.Services.AddScoped<IWantingService, WantingService>();
@@ -30,8 +30,7 @@ builder.Services.AddCors(options => options.AddPolicy("ReactJSDomain",
         policy => policy
             .AllowAnyOrigin()
             .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials()));
+            .AllowAnyMethod()));
 
 var app = builder.Build();
 
