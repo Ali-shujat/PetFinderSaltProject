@@ -51,7 +51,6 @@ public class Mapper
             wanting.Latitud = lati;
             wanting.Longitud = longi;
         }
-        wanting.EventInfo = 
             
         return wanting;
     }
