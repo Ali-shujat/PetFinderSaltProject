@@ -48,8 +48,8 @@ public class Mapper
         if (Double.TryParse(makeTwo[0], out lati) &&
             Double.TryParse(makeTwo[1], out longi))
         {
-            wanting.Latitud = request.Position[0];
-            wanting.Longitud = request.Position[1];
+            wanting.Latitud = lati;
+            wanting.Longitud = longi;
         }
 
         return wanting;
