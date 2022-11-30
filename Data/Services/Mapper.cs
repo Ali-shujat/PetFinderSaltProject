@@ -38,7 +38,7 @@ public class Mapper
                     FirstName = request.OwnerName
                 }
             },
-            EventInfo = request.EventInfo
+            EventInfo = request.Description
         };
         if (request.Position != null && request.Position.Length == 2)
         {
@@ -72,7 +72,7 @@ public class Mapper
     {
         return new WantingResponse
         {
-            EventInfo = wanting.EventInfo!,
+            Description = wanting.EventInfo!,
             CatName = wanting.Cat.Name!,
             Image = wanting.Cat.Image,
             AdditionalInfo = wanting.Cat.AdditionalInfo,

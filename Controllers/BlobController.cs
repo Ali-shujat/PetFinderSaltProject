@@ -20,7 +20,7 @@ namespace PetFinderApi.Controllers;
         private readonly string containerName = "petpics";
 
         [HttpPost(nameof(UploadFile))]  
-        public async Task < IActionResult > UploadFile(IFormFile files)
+        public async Task < IActionResult > UploadFile([FromForm] IFormFile files)
         {
             string systemFileName = "LOTTENPLAYING";//new Guid().ToString(); 
             //string blobstorageconnection = _configuration.GetValue < string > ("BlobConnectionString");
