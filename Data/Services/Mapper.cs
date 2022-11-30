@@ -40,7 +40,13 @@ public class Mapper
             },
             EventInfo = request.Description
         };
-        if (request.Position != null && request.Position.Length == 2)
+        var makeTwo = request.Position.Split(',');
+        makeTwo[1] = makeTwo[1].Trim().Replace('.', ',');
+        makeTwo[0] = makeTwo[0].Replace('.', ',');
+        double longi = 0;
+        double lati = 0;
+        if (Double.TryParse(makeTwo[0], out lati) &&
+            Double.TryParse(makeTwo[1], out longi))
         {
             wanting.Latitud = request.Position[0];
             wanting.Longitud = request.Position[1];
