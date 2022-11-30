@@ -9,6 +9,7 @@ public class WantingListObjResponse
     public double[] Location { get; set; }
     public string Contactinformation { get; set; } = null!;
     public string DetailedUri { get; set; } = null!;
+    public string? CatName { get; set; } = null!;
 
     public WantingListObjResponse()
     {

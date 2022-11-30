@@ -24,7 +24,6 @@ public class WantingController : ControllerBase
     private readonly string blobstorageconnection = "DefaultEndpointsProtocol=https;AccountName=petblobaccount;AccountKey=1Oa4CeDyrtKAVGnBIweNqXsRus9xkf45xOSRJQ9l+jlspwPlh1E0BlHJJ3SajJuhKHX4uIvB8WHP+AStH6HvLg==;EndpointSuffix=core.windows.net";
     private readonly string containerName = "petpics";
 
-
     public WantingController(IWantingService service)
     {
         _dbservice = service;

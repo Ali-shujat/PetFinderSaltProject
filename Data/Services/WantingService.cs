@@ -16,8 +16,9 @@ public class WantingService : IWantingService
     {
         var wantings = await _context.Wanting
             .Include(w => w.Cat)
-            .Include(w => w.Cat.Owner)
+            .ThenInclude(c => c.Owner)
             .ToListAsync();
+        
         if (wantings == null) return new List<Wanting>();
         return wantings;
     }
@@ -29,7 +30,7 @@ public class WantingService : IWantingService
         return await _context.Wanting
             .Where(w => w.Id == id)
             .Include(w => w.Cat)
-            .Include(w => w.Cat.Owner)
+            .ThenInclude(c => c.Owner)
             .FirstOrDefaultAsync();
     }
 

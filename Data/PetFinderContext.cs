@@ -77,7 +77,6 @@ public class PetFinderContext : DbContext
             {
                 Name ="Fiona",
                 AdditionalInfo = "Very playful, loves to chase pidgeons",
-                Image = "1.jpg",
                 Owner = new Person
                 {
                     FirstName = "Ali Darwish",
@@ -88,6 +87,26 @@ public class PetFinderContext : DbContext
         };
         
         Wanting.AddRange(firstWanting, secondWanting, thirdWanting);
+        
+        SaveChanges();
+        var firstSighting = new Sighting
+        {
+            Latitud = 59.13188071460113, 
+            Longitud = 18.02360912266543,
+            EventInfo = "I found her close to the train station playing with a red ball.",
+            Cat = new Cat
+            {
+                Name ="",
+                AdditionalInfo = "She has a with stick in her face.",
+                Owner = new Person
+                {
+                    FirstName = "Paul",
+                    Email = "paul.tris@hotmail.com"
+                }
+            },
+            imageFileName = "456.jpg"
+        };
+        Sighting.AddRange(firstSighting);
         SaveChanges();
     }
 
@@ -137,7 +156,7 @@ public class PetFinderContext : DbContext
                 .HasMaxLength(15);
 
             entity.Property(e => e.Email)
-                .HasMaxLength(20);
+                .HasMaxLength(60);
         });
 
         modelBuilder.Entity<Wanting>(entity =>

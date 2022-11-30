@@ -16,7 +16,7 @@ public class SightingRepo : ISightingService
     {
         var sightings = await _context.Sighting
             .Include(s => s.Cat)
-            .Include(s => s.Cat.Owner)
+            .ThenInclude(c => c.Owner)
             .ToListAsync();
         if (sightings == null) return new List<Sighting>();
         return sightings;
@@ -29,7 +29,7 @@ public class SightingRepo : ISightingService
         return await _context.Sighting
             .Where(s => s.Id == id)
             .Include(s => s.Cat)
-            .Include(s => s.Cat.Owner)
+            .ThenInclude(c => c.Owner)
             .FirstOrDefaultAsync();
     }
 

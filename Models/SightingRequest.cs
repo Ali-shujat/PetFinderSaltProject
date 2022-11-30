@@ -9,5 +9,4 @@ public class SightingRequest
     public string? EventInfo { get; set; }
     public IFormFile image { get; set; }
 
-    public string? User { get; set; }
 }

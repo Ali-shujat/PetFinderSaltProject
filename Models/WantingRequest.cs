@@ -10,6 +10,4 @@ public class WantingRequest
     public string? Description { get; set; }
     public IFormFile image { get; set; }
     
-    public string? User { get; set; }
-    
 }

@@ -1,3 +1,4 @@
+using System.Globalization;
 using PetFinderApi.Models;
 
 namespace PetFinderApi.Data.Services;
@@ -35,23 +36,23 @@ public class Mapper
                 Name = request.CatName,
                 Owner = new Person
                 {
-                    FirstName = request.OwnerName
+                    FirstName = request.OwnerName,
+                    Email = request.Email,
                 }
             },
             EventInfo = request.Description
         };
+        
         var makeTwo = request.Position.Split(',');
-        makeTwo[1] = makeTwo[1].Trim().Replace('.', ',');
-        makeTwo[0] = makeTwo[0].Replace('.', ',');
+        var style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite;
+        var culture = CultureInfo.InvariantCulture;
         double longi = 0;
         double lati = 0;
-        if (Double.TryParse(makeTwo[0], out lati) &&
-            Double.TryParse(makeTwo[1], out longi))
-        {
-            wanting.Latitud = lati;
-            wanting.Longitud = longi;
-        }
-            
+        var f1 = Double.TryParse(makeTwo[0], style, culture, out lati);
+        var f2 = Double.TryParse(makeTwo[1], style, culture, out longi);
+        wanting.Latitud = lati;
+        wanting.Longitud = longi;
+   
         return wanting;
     }
 
@@ -67,6 +68,7 @@ public class Mapper
                 Contactinformation = w.Cat.Owner.Email,
                 DetailedUri = "https://petfinderapi.azurewebsites.net/api/Wanting/" + w.Id.ToString(),
                 PictureUrl = fileService.getPath(w.imageFileName),
+                CatName = w.Cat.Name,
             }).ToList();
         return new WantingListResponse
         {
@@ -126,22 +128,21 @@ public class Mapper
                 AdditionalInfo = request.CatDescription,
                 Owner = new Person
                 {
-                    FirstName = request.InformerName
+                    FirstName = request.InformerName,
+                    Email = request.Email //?? "No email",
                 }
             },
             EventInfo = request.EventInfo
         };
         var makeThree = request.Position.Split(',');
-        makeThree[1] = makeThree[1].Trim().Replace('.', ',');
-        makeThree[0] = makeThree[0].Replace('.', ',');
+        var style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite;
+        var culture = CultureInfo.InvariantCulture;
         double longi = 0;
         double lati = 0;
-        if (Double.TryParse(makeThree[0], out lati) &&
-            Double.TryParse(makeThree[1], out longi))
-        {
-            sighting.Latitud = lati;
-            sighting.Longitud = longi;
-        }
+        var f1 = Double.TryParse(makeThree[0], style, culture, out lati);
+        var f2 = Double.TryParse(makeThree[1], style, culture, out longi);
+        sighting.Latitud = lati;
+        sighting.Longitud = longi;
 
         return sighting;
     }
