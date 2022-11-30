@@ -86,4 +86,87 @@ public class Mapper
             OwnerPhone = wanting.Cat.Owner.Phone
         };
     }
+
+    public Cat SightingReqToCat(SightingRequest request)
+    {
+        return new Cat
+        {
+            Name = "",
+            AdditionalInfo = request.CatDescription,
+            Owner = new Person
+            {
+                FirstName = request.InformerName,
+                Email = request.Email
+            }
+        };
+    }
+
+    public Person SightingReqToPerson(SightingRequest request)
+    {
+        return new Person
+        {
+            FirstName = request.InformerName,
+            Email = request.Email
+        };
+    }
+
+    public Sighting SightingReqToSighting(SightingRequest request)
+    {
+        var sighting = new Sighting
+        {
+            Cat = new Cat
+            {
+                AdditionalInfo = request.CatDescription,
+                Owner = new Person
+                {
+                    FirstName = request.InformerName
+                }
+            },
+            EventInfo = request.EventInfo
+        };
+        if (request.Position != null && request.Position.Length == 2)
+        {
+            sighting.Latitud = request.Position[0];
+            sighting.Longitud = request.Position[1];
+        }
+
+        return sighting;
+    }
+
+    public SightingListResponse getAllSightings(List<Sighting> sightings)
+    {
+        var fileService = new FileService();
+        var mappedList = sightings
+            .Select(s => new SightingListObjResponse
+            {
+                id = s.Id,
+                    Location = new double[] { s.Latitud, s.Longitud },
+                EventInfo = s.EventInfo!,
+                Contactinformation = s.Cat.Owner.Email,
+                DetailedUri = "https://petfinderapi.azurewebsites.net/api/Sighting/" + s.Id.ToString(),
+                PictureUrl = fileService.getPath(s.imageFileName),
+            }).ToList();
+        return new SightingListResponse
+        {
+            Sightings = mappedList
+        };
+    }
+
+    public SightingResponse makeOneSighting(Sighting sighting)
+    {
+        return new SightingResponse
+        {
+            EventInfo = sighting.EventInfo!,
+            Image = sighting.Cat.Image,
+            AdditionalInfo = sighting.Cat.AdditionalInfo,
+            Breed = sighting.Cat.Breed,
+            Size = sighting.Cat.Size,
+            Eyecolor = sighting.Cat.Eyecolor,
+            CoatLength = sighting.Cat.CoatLength,
+            InformerFirstName = sighting.Cat.Owner!.FirstName,
+            InformerSurname = sighting.Cat.Owner.Surname,
+            InformerEmail = sighting.Cat.Owner.Email,
+            InformerPhone = sighting.Cat.Owner.Phone
+        };
+    }
 }

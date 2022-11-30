@@ -26,10 +26,10 @@ public class SightingRepo : ISightingService
         return sighting;
     }
 
-    public Sighting Create(Sighting sighting)
+    public async Task<Sighting> Create(Sighting sighting)
     {
-        _context.Sighting.Add(sighting);
-        _context.SaveChanges();
+        await _context.Sighting.AddAsync(sighting);
+        await _context.SaveChangesAsync();
         return sighting;
     }
 }
