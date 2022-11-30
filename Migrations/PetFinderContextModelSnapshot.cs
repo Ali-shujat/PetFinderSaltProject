@@ -123,6 +123,9 @@ namespace testing.Migrations
                     b.Property<double>("Longitud")
                         .HasColumnType("float");
 
+                    b.Property<string>("imageFileName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CatId");

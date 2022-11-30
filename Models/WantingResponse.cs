@@ -3,7 +3,7 @@ namespace PetFinderApi.Models;
 public class WantingResponse
 {
     public int id { get; set; }
-    public string EventInfo { get; set; } = null!;
+    public string Description { get; set; } = null!;
     public string CatName { get; set; } = null!;
     public string? Image { get; set; }
     public string? AdditionalInfo { get; set; }
