@@ -25,7 +25,7 @@ public class WantingController : ControllerBase
     private readonly string containerName = "petpics";
 
 
-    public WantingController(IWantingService service, PetFinderContext context)
+    public WantingController(IWantingService service)
     {
         _dbservice = service;
     }
@@ -51,54 +51,24 @@ public class WantingController : ControllerBase
     public async Task<ActionResult<Wanting>> Create([FromForm] WantingRequest request)
     {
         var wanting = mapper.WantingReqToWanting(request);
-        var fileName = Guid.NewGuid().ToString() + request.image.FileName;
+        string fileName;
+        if (request.image.FileName.Length > 0)
+        {
+             fileName = Guid.NewGuid() + request.image.FileName;
+             CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
+             CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
+             CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+             CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
+             await using (var data = request.image.OpenReadStream())
+             { 
+                 await blockBlob.UploadFromStreamAsync(data);
+             }
+        }
+        else fileName = "No image";
         wanting.imageFileName = fileName;
+
         await _dbservice.Create(wanting);
-
-        CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
-        CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
-        CloudBlobContainer container = blobClient.GetContainerReference(containerName);
-        CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
-        await using (var data = request.image.OpenReadStream())
-        { 
-            await blockBlob.UploadFromStreamAsync(data);
-        }
+        
         return CreatedAtAction("GetOneWanting", new { id = wanting.Id }, mapper.makeOne(wanting));
-    }
-    
-    [HttpPost]
-    [Route("notForm")]
-    public async Task<ActionResult<Wanting>> CreateWithoutForm(WantingRequest request)
-    {
-        var wanting = mapper.WantingReqToWanting(request);
-        var fileName = Guid.NewGuid().ToString() + request.image.FileName;
-        wanting.imageFileName = fileName;
-        await _dbservice.Create(wanting);
-
-        CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
-        CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
-        CloudBlobContainer container = blobClient.GetContainerReference(containerName);
-        CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
-        await using (var data = request.image.OpenReadStream())
-        { 
-            await blockBlob.UploadFromStreamAsync(data);
-        }
-        return CreatedAtAction("GetOneWanting", new { id = wanting.Id }, mapper.makeOne(wanting));
-    }
-    [HttpPost]
-    [Route("lottentestingstuff")]
-    public async Task<ActionResult<Wanting>> CreateWithoutForm(IFormFile file)
-    {
-        var fileName = "GUIDO";
-
-        CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
-        CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
-        CloudBlobContainer container = blobClient.GetContainerReference(containerName);
-        CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
-        await using (var data = file.OpenReadStream())
-        { 
-            await blockBlob.UploadFromStreamAsync(data);
-        }
-        return Ok("thank you");
     }
 }   
