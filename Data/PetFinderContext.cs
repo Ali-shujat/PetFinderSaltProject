@@ -77,6 +77,7 @@ public class PetFinderContext : DbContext
             {
                 Name ="Fiona",
                 AdditionalInfo = "Very playful, loves to chase pidgeons",
+                Image = "1.jpg",
                 Owner = new Person
                 {
                     FirstName = "Ali Darwish",
