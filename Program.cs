@@ -30,8 +30,7 @@ builder.Services.AddCors(options => options.AddPolicy("ReactJSDomain",
         policy => policy
             .AllowAnyOrigin()
             .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials()));
+            .AllowAnyMethod()));
 
 var app = builder.Build();
 
