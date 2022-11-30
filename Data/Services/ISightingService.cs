@@ -6,5 +6,5 @@ public interface ISightingService
 {
     Task<List<Sighting>> GetAll();
     Task<Sighting> GetOne(int id);
-    Sighting Create(Sighting sighting);
+    Task<Sighting> Create(Sighting sighting);
 }
