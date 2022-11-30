@@ -121,7 +121,7 @@ public class Mapper
         {
             Cat = new Cat
             {
-                Name = "",
+                Name = "Guido",
                 AdditionalInfo = request.CatDescription,
                 Owner = new Person
                 {
